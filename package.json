@@ -1,0 +1,24 @@
+{
+  "name": "onlithuyetcoban-hs",
+  "version": "1.0.0",
+  "description": "Ứng dụng tạo file Word tóm tắt lý thuyết trọng tâm Hóa học THPT (Lớp 10, 11, 12 - HK1, HK2) bộ sách Kết nối tri thức với cuộc sống",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "hoa-hoc",
+    "kntt",
+    "docx",
+    "on-thi-thpt",
+    "giao-duc"
+  ],
+  "author": "TMT-2025",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "docx": "^9.7.1",
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,43 @@
+<!--
+  Đây là bản sao mã nguồn của widget "Bảng chọn khối lớp / học kì" đã hiển thị
+  trong cuộc trò chuyện (được tạo bằng tool visualize:show_widget của Claude).
+
+  Widget này chạy trong môi trường trò chuyện của Claude (claude.ai) và dùng
+  hàm toàn cục sendPrompt(text) do Claude cung cấp để gửi một tin nhắn (prompt)
+  quay lại cuộc trò chuyện khi người dùng bấm nút. Khi nhận được prompt đó,
+  Claude sẽ chạy các script trong các thư mục hoa10-hk1 / hoa11-hk1 / hoa12-hk1
+  (hoặc script tương ứng cho học kì khác) để biên soạn nội dung và xuất file .docx.
+
+  Nếu muốn dùng lại HTML này bên ngoài claude.ai, cần tự viết hàm sendPrompt(text)
+  (ví dụ: gọi API của bạn, hoặc thay bằng điều hướng tới trang xử lý riêng).
+-->
+<div style="padding:1rem 0">
+<h2 class="sr-only">Bảng chọn khối lớp và học kì để tạo file tóm tắt lý thuyết Hóa học</h2>
+<div style="display:flex;flex-direction:column;gap:12px">
+
+<div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem">
+<div style="font-size:15px;font-weight:500;margin-bottom:10px">Lớp 10</div>
+<div style="display:flex;gap:8px">
+<button onclick="sendPrompt('Hãy tạo file docx tóm tắt lý thuyết trọng tâm Hóa học lớp 10, học kì 1, theo sách Kết nối tri thức.')" style="flex:1"><i class="ti ti-download" aria-hidden="true" style="margin-right:6px"></i>Học kì 1 ↗</button>
+<button onclick="sendPrompt('Hãy tạo file docx tóm tắt lý thuyết trọng tâm Hóa học lớp 10, học kì 2, theo sách Kết nối tri thức.')" style="flex:1"><i class="ti ti-download" aria-hidden="true" style="margin-right:6px"></i>Học kì 2 ↗</button>
+</div>
+</div>
+
+<div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem">
+<div style="font-size:15px;font-weight:500;margin-bottom:10px">Lớp 11</div>
+<div style="display:flex;gap:8px">
+<button onclick="sendPrompt('Hãy tạo file docx tóm tắt lý thuyết trọng tâm Hóa học lớp 11, học kì 1, theo sách Kết nối tri thức.')" style="flex:1"><i class="ti ti-download" aria-hidden="true" style="margin-right:6px"></i>Học kì 1 ↗</button>
+<button onclick="sendPrompt('Hãy tạo file docx tóm tắt lý thuyết trọng tâm Hóa học lớp 11, học kì 2, theo sách Kết nối tri thức.')" style="flex:1"><i class="ti ti-download" aria-hidden="true" style="margin-right:6px"></i>Học kì 2 ↗</button>
+</div>
+</div>
+
+<div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem">
+<div style="font-size:15px;font-weight:500;margin-bottom:10px">Lớp 12</div>
+<div style="display:flex;gap:8px">
+<button onclick="sendPrompt('Hãy tạo file docx tóm tắt lý thuyết trọng tâm Hóa học lớp 12, học kì 1, theo sách Kết nối tri thức.')" style="flex:1"><i class="ti ti-download" aria-hidden="true" style="margin-right:6px"></i>Học kì 1 ↗</button>
+<button onclick="sendPrompt('Hãy tạo file docx tóm tắt lý thuyết trọng tâm Hóa học lớp 12, học kì 2, theo sách Kết nối tri thức.')" style="flex:1"><i class="ti ti-download" aria-hidden="true" style="margin-right:6px"></i>Học kì 2 ↗</button>
+</div>
+</div>
+
+</div>
+</div>

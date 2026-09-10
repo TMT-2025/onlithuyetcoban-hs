@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+*.log
+output/
+*.tmp
+.vercel/
+
+# Heavy raw reference files (keep repo clean and fast for Vercel)
+*.pdf
+*.xlsx
+*.doc
