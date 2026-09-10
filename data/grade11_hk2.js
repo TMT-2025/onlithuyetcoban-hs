@@ -1,264 +1,259 @@
+// Dữ liệu lý thuyết chi tiết Hóa học 11 - HK2 chuẩn format Claude docx
 module.exports = {
-  "title": "TÀI LIỆU TÓM TẮT LÝ THUYẾT TRỌNG TÂM HÓA HỌC 11 – HỌC KÌ 2",
-  "subtitle": "Bộ sách Kết nối tri thức với cuộc sống – Dẫn xuất Halogen, Alcohol, Phenol, Hợp chất Carbonyl & Carboxylic Acid",
-  "parts": [
+  title: "TÀI LIỆU TÓM TẮT LÝ THUYẾT TRỌNG TÂM HÓA HỌC 11 – HỌC KÌ 2",
+  subtitle: "Bộ sách Kết nối tri thức với cuộc sống – Dẫn xuất halogen, Alcohol, Phenol, Carbonyl & Carboxylic acid",
+  parts: [
     {
-      "id": "hk2_11_p1",
-      "label": "Phần 1/7: Dẫn xuất Halogen – Cấu tạo, Danh pháp, Phản ứng thế & tách (Bài 19)",
-      "chapters": [
-        {
-          "title": "CHƯƠNG 5: DẪN XUẤT HALOGEN – ALCOHOL – PHENOL – BÀI 19: DẪN XUẤT HALOGEN",
-          "sections": [
-            {
-              "heading": "1. Ý nghĩa thực tiễn & Bản chất Dẫn xuất Halogen",
-              "image": {
-                "path": "assets/images/grade11/organic_structures.png",
-                "caption": "Hình 2.1: Cấu trúc không gian và đặc điểm liên kết của các nhóm chức hữu cơ có oxy (Alcohol, Phenol, Carbonyl, Acid)",
-                "width": 500,
-                "height": 250
-              },
-              "content": [
-                "💡 Ý NGHĨA THỰC TIỄN CỦA DẪN XUẤT HALOGEN:",
-                "– Dẫn xuất halogen là mắt xích trung gian không thể thiếu trong công nghiệp tổng hợp hữu cơ:",
-                "  • Poly(vinyl chloride) (PVC): Sản xuất ống cấp thoát nước, vỏ bọc dây điện, áo mưa.",
-                "  • Teflon (PTFE): Lớp chống dính chảo chiên rán chịu nhiệt hơn 300 °C, bền với mọi axit kiềm.",
-                "  • Y học: Halothane (CF₃-CHBrCl) là thuốc gây mê đường hô hấp an toàn trong phẫu thuật.",
-                "  • Cảnh báo môi trường: Hợp chất CFC (freon) từng dùng làm ga tủ lạnh đã gây thủng tầng ozone Nam Cực, nay đã bị cấm theo Nghị định thư Montreal.",
-                "– Định nghĩa: Hợp chất hữu cơ thu được khi thay thế nguyên tử H trong hydrocarbon bằng nguyên tử halogen (F, Cl, Br, I).",
-                "– Danh pháp thay thế IUPAC: Vị trí halogen - tên halogen + tên mạch hydrocarbon.",
-                "  • Ví dụ: CH₃-Cl (chloromethane); CH₃-CH₂-Br (bromoethane); CH₂=CH-Cl (chloroethene / vinyl chloride)."
-              ]
-            },
-            {
-              "heading": "2. Tính chất hóa học: Phản ứng thế nhóm -OH & Phản ứng tách HX",
-              "content": [
-                "– Do liên kết C-X phân cực mạnh về phía halogen (nguyên tử C mang điện tích dương một phần δ+), dẫn xuất halogen dễ tham gia phản ứng thế nucleophile và phản ứng tách.",
-                "⚡ CÁC PHƯƠNG TRÌNH PHẢN ỨNG MINH HỌA:",
-                "  1. Phản ứng thế nhóm -OH (Thủy phân trong kiềm):",
-                "     CH₃-CH₂-Br + NaOH →(H₂O, t°) CH₃-CH₂-OH (ethanol) + NaBr",
-                "     CH₂=CH-CH₂-Cl + NaOH →(t°) CH₂=CH-CH₂-OH (allyl alcohol) + NaCl",
-                "     🔍 Chú ý: Dẫn xuất gắn halogen trực tiếp vào vòng benzene (C₆H₅Cl) hoặc carbon liên kết đôi (CH₂=CH-Cl) RẤT KHÓ bị thủy phân, cần điều kiện nhiệt độ và áp suất cực cao.",
-                "  2. Phản ứng tách Hydrogen Halide (HX) theo quy tắc Zaitsev:",
-                "     Đun nóng dẫn xuất halogen với base mạnh trong cồn (KOH / C₂H₅OH, t°):",
-                "     CH₃-CH₂-CHBr-CH₃ + KOH →(cồn, t°) CH₃-CH=CH-CH₃ (but-2-ene - Sản phẩm chính 80%) + CH₃-CH₂-CH=CH₂ (but-1-ene - Sản phẩm phụ 20%) + KBr + H₂O",
-                "     🔍 GIẢI THÍCH QUY TẮC TÁCH ZAITSEV: Nguyên tử halogen bị tách ưu tiên cùng với nguyên tử H ở nguyên tử C bên cạnh có bậc cao hơn (C có ít H hơn), tạo thành alkene có nhiều nhóm thế hơn ở liên kết đôi (sản phẩm chính bền hơn về mặt nhiệt động)."
-              ]
-            }
-          ]
-        }
-      ]
+      id: "hk2_11_p1",
+      label: "Phần 1/7: Dẫn xuất halogen của hydrocarbon & Quy tắc Zaitsev (Bài 19)",
+      builder: function(H) {
+        const { P, Chapter, Bai, Section, Sub, Bullet, NoteBox, Example, CheckQuestions, ChapterIntro, DataTable, Img, spacer, Eq, AlignmentType } = H;
+        const children = [];
+        
+children.push(Chapter("CHƯƠNG 5: DẪN XUẤT HALOGEN – ALCOHOL – PHENOL"));
+children.push(ChapterIntro("Ý nghĩa thực tiễn", [
+  "Dẫn xuất halogen, alcohol và phenol là **cầu nối then chốt** giữa hydrocarbon đơn giản và các hợp chất hữu cơ phức tạp trong dược phẩm, mĩ phẩm, hương liệu.",
+  "**Alcohol (ethanol)** là nhiên liệu sinh học E5, dung môi sát trùng y tế 70°, nguyên liệu trong ngành đồ uống và tổng hợp hữu cơ.",
+  "**Phenol** là nguyên liệu sản xuất nhựa bakelite (vỏ thiết bị điện), thuốc nổ acid picric, dược phẩm aspirin giảm đau hạ sốt."
+]));
+children.push(spacer());
+
+children.push(Bai("Bài 19. Dẫn xuất halogen của hydrocarbon"));
+children.push(Section("I. Khái niệm, đồng phân, danh pháp"));
+children.push(P("Khi thay thế một hay nhiều nguyên tử hydrogen trong phân tử hydrocarbon bằng một hay nhiều nguyên tử halogen, ta được **dẫn xuất halogen của hydrocarbon**. Công thức chung: **R–X** (X là F, Cl, Br, I)."));
+children.push(DataTable(
+  ["Hợp chất", "Công thức cấu tạo", "Tên thay thế IUPAC", "Tên thông thường"],
+  [
+    ["CH3Cl", "CH3-Cl", "Chloromethane", "Methyl chloride"],
+    ["C2H5Br", "CH3-CH2-Br", "Bromoethane", "Ethyl bromide"],
+    ["CH2=CH-Cl", "CH2=CH-Cl", "Chloroethene", "Vinyl chloride (trùng hợp tạo PVC)"],
+    ["C6H5Br", "C6H5-Br", "Bromobenzene", "Phenyl bromide"]
+  ]
+));
+children.push(spacer());
+children.push(Section("II. Tính chất hoá học"));
+children.push(Sub("1. Phản ứng thế nhóm -OH (thuỷ phân trong môi trường kiềm)"));
+children.push(P("Dẫn xuất halogen tác dụng với dung dịch kiềm (NaOH/KOH) đun nóng tạo thành alcohol:"));
+children.push(Eq("CH₃-CH₂-Br  +  NaOH  →(t°)  CH₃-CH₂-OH  +  NaBr"));
+children.push(Sub("2. Phản ứng tách hydrogen halide (Quy tắc Zaitsev)"));
+children.push(P("Khi đun nóng dẫn xuất halogen với dung dịch KOH trong ethanol, xảy ra phản ứng tách HX tạo alkene:"));
+children.push(Sub("Quy tắc Zaitsev"));
+children.push(P("Khi tách HX khỏi dẫn xuất halogen, nguyên tử halogen X ưu tiên **tách ra cùng với nguyên tử H ở nguyên tử carbon bên cạnh có bậc cao hơn** (mang ít H hơn), tạo thành alkene có nhiều nhóm thế hơn (bền hơn) là **sản phẩm chính**."));
+children.push(Example("Ví dụ minh hoạ: Tách HBr từ 2-bromobutane", [
+  "Phương trình: CH3-CH(Br)-CH2-CH3 + KOH (ethanol, t°) thu được 2 sản phẩm:",
+  "Sản phẩm chính (tách H ở C bậc II): **CH3-CH=CH-CH3 (but-2-ene)**.",
+  "Sản phẩm phụ (tách H ở C bậc I): **CH2=CH-CH2-CH3 (but-1-ene)**."
+]));
+children.push(CheckQuestions("Tự kiểm tra nhanh", [
+  { q: "Nêu quy tắc Zaitsev và xác định sản phẩm chính khi đun nóng 2-chloropropane với KOH/ethanol.", a: "2-chloropropane có cấu tạo đối xứng CH3-CH(Cl)-CH3, tách HCl chỉ tạo 1 alkene duy nhất là propene: CH2=CH-CH3." }
+]));
+
+        return children;
+      }
     },
     {
-      "id": "hk2_11_p2",
-      "label": "Phần 2/7: Alcohol – Định nghĩa, Danh pháp, Tính chất hóa học & Polyol (Bài 20)",
-      "chapters": [
-        {
-          "title": "CHƯƠNG 5: BÀI 20 – ALCOHOL (R-OH)",
-          "sections": [
-            {
-              "heading": "1. Ý nghĩa thực tiễn & Cấu tạo phân tử Alcohol",
-              "content": [
-                "💡 Ý NGHĨA THỰC TIỄN CỦA ALCOHOL:",
-                "– Ethanol (C₂H₅OH): Nồng độ 70° có tác dụng sát khuẩn y tế tối ưu nhất trong mùa dịch bệnh; pha vào xăng tạo xăng sinh học E5 thân thiện môi trường; lên men giấm và sản xuất đồ uống.",
-                "– Glycerol (C₃H₅(OH)₃): Chất dưỡng ẩm vô cùng phổ biến trong kem dưỡng da, son môi, siro ho; nguyên liệu sản xuất thuốc nổ nitroglycerin.",
-                "– Cảnh báo: Methanol (CH₃OH) là cồn công nghiệp cực độc. Uống phải rượu giả chứa methanol sẽ bị ngộ độc chuyển hóa thành acid formic gây mù mắt vĩnh viễn và tử vong.",
-                "– Bậc alcohol: Bằng bậc của nguyên tử C liên kết trực tiếp với nhóm -OH (bậc I, bậc II, bậc III).",
-                "– Tính chất vật lí: Có liên kết hydrogen liên phân tử (...O-H...O-H...) nên nhiệt độ sôi cao hơn nhiều so với hydrocarbon cùng M. Tan vô hạn trong nước."
-              ]
-            },
-            {
-              "heading": "2. Tính chất hóa học của Alcohol & Các phản ứng minh họa",
-              "content": [
-                "⚡ CÁC PHƯƠNG TRÌNH PHẢN ỨNG MINH HỌA CHI TIẾT:",
-                "  1. Phản ứng thế nguyên tử H của nhóm -OH (tính acid cực yếu):",
-                "     2C₂H₅OH + 2Na → 2C₂H₅ONa (sodium ethoxide) + H₂↑",
-                "  2. Phản ứng tách nước (Tùy thuộc vào nhiệt độ phản ứng):",
-                "     • Tách nước tạo Ether ở 140 °C (H₂SO₄ đặc):",
-                "       2C₂H₅OH →(H₂SO₄ đặc, 140°C) C₂H₅-O-C₂H₅ (diethyl ether - thuốc mê) + H₂O",
-                "     • Tách nước tạo Alkene ở 170 °C (H₂SO₄ đặc) theo quy tắc Zaitsev:",
-                "       CH₃-CH(OH)-CH₂-CH₃ →(H₂SO₄ đặc, 170°C) CH₃-CH=CH-CH₃ (but-2-ene - chính) + H₂O",
-                "  3. Phản ứng oxi hóa không hoàn toàn bằng CuO đun nóng:",
-                "     • Alcohol bậc I bị oxi hóa thành Aldehyde:",
-                "       CH₃-CH₂-OH + CuO(đen) →(t°) CH₃-CHO (ethanal) + Cu(đỏ) + H₂O",
-                "     • Alcohol bậc II bị oxi hóa thành Ketone:",
-                "       CH₃-CH(OH)-CH₃ + CuO →(t°) CH₃-CO-CH₃ (acetone) + Cu + H₂O",
-                "     • Alcohol bậc III KHÔNG bị oxi hóa ở điều kiện này.",
-                "  4. Phản ứng đặc trưng của Polyol có từ 2 nhóm -OH kề nhau (Glycerol, Ethylene glycol):",
-                "     Hòa tan kết tủa Cu(OH)₂ ở nhiệt độ thường tạo dung dịch phức màu xanh lam thẫm:",
-                "     2C₃H₅(OH)₃ + Cu(OH)₂ → [C₃H₅(OH)₂O]₂Cu (Copper(II) glycerate xanh lam) + 2H₂O",
-                "     🔍 GIẢI THÍCH BẢN CHẤT: Các nhóm -OH kề nhau phối trí với ion Cu²⁺ tạo vòng chelate 5 cạnh cực kì bền vững."
-              ]
-            }
-          ]
-        }
-      ]
+      id: "hk2_11_p2",
+      label: "Phần 2/7: Alcohol – Cấu tạo, Liên kết H, Tính chất hoá học & Ứng dụng (Bài 20)",
+      builder: function(H) {
+        const { P, Chapter, Bai, Section, Sub, Bullet, NoteBox, Example, CheckQuestions, ChapterIntro, DataTable, Img, spacer, Eq, AlignmentType } = H;
+        const children = [];
+        
+children.push(Bai("Bài 20. Alcohol"));
+children.push(Section("I. Cấu trúc phân tử và tính chất vật lí"));
+children.push(P("**Alcohol** là hợp chất hữu cơ trong phân tử có nhóm hydroxyl (**–OH**) liên kết trực tiếp với nguyên tử carbon no. Công thức chung của alcohol no, đơn chức, mạch hở: **CnH2n+1OH** (n ≥ 1)."));
+children.push(...Bullet([
+  "**Bậc của alcohol:** bằng bậc của nguyên tử carbon liên kết với nhóm –OH (Alcohol bậc I, bậc II, bậc III).",
+  "**Liên kết hydrogen:** Do nguyên tử O có độ âm điện lớn, nhóm –OH phân cực mạnh tạo **liên kết hydrogen liên phân tử** giữa các phân tử alcohol và giữa alcohol với nước."
+]));
+children.push(Sub("Giải thích"));
+children.push(P("Nhờ có liên kết hydrogen liên phân tử bền vững, alcohol có **nhiệt độ sôi cao hơn nhiều** so với các hydrocarbon, dẫn xuất halogen hoặc ether có phân tử khối tương đương. Các alcohol đầu dãy (methanol, ethanol) **tan vô hạn trong nước** do tạo được liên kết hydrogen với phân tử nước."));
+children.push(Section("II. Tính chất hoá học của alcohol"));
+children.push(Sub("1. Phản ứng thế nguyên tử H của nhóm –OH"));
+children.push(Eq("2C₂H₅OH  +  2Na  →  2C₂H₅ONa (sodium ethoxide)  +  H₂↑"));
+children.push(Sub("2. Phản ứng tách nước (tạo alkene hoặc ether)"));
+children.push(Eq("**Tạo ether (ở 140 °C, H2SO4 đặc):**  2C₂H₅OH  →(140°C, H2SO4 đặc)  C₂H₅-O-C₂H₅ (diethyl ether)  +  H₂O"));
+children.push(Eq("**Tạo alkene (ở 170 °C, H2SO4 đặc):**  CH₃-CH₂-OH  →(170°C, H2SO4 đặc)  CH₂=CH₂  +  H₂O"));
+children.push(Sub("3. Phản ứng oxi hoá không hoàn toàn"));
+children.push(DataTable(
+  ["Bậc của alcohol", "Sản phẩm oxi hoá bởi CuO (t°)", "Ví dụ"],
+  [
+    ["Alcohol bậc I", "Aldehyde (–CHO)", "CH3-CH2-OH + CuO →(t°) CH3-CHO + Cu + H2O"],
+    ["Alcohol bậc II", "Ketone (>C=O)", "CH3-CH(OH)-CH3 + CuO →(t°) CH3-CO-CH3 + Cu + H2O"],
+    ["Alcohol bậc III", "Khó bị oxi hoá ở điều kiện thường", "Không phản ứng với CuO ở điều kiện êm dịu"]
+  ]
+));
+children.push(spacer());
+children.push(NoteBox("Tính chất đặc biệt của polyalcohol (như glycerol, ethylene glycol)", [
+  "Các polyalcohol có **từ hai nhóm –OH kề nhau trở lên** có khả năng hoà tan Cu(OH)2 tạo **dung dịch phức chất màu xanh lam đậm đặc trưng** — dùng để nhận biết glycerol, ethylene glycol:",
+  "2C₃H₅(OH)₃  +  Cu(OH)₂  →  [C₃H₅(OH)₂O]₂Cu (dung dịch xanh lam thẫm)  +  2H₂O"
+]));
+
+        return children;
+      }
     },
     {
-      "id": "hk2_11_p3",
-      "label": "Phần 3/7: Phenol – Cấu tạo, Tính acid yếu, Thế nhân thơm & Ôn tập Chương 5 (Bài 21, 22)",
-      "chapters": [
-        {
-          "title": "CHƯƠNG 5: BÀI 21, 22 – PHENOL (C6H5-OH) VÀ ÔN TẬP CHƯƠNG 5",
-          "sections": [
-            {
-              "heading": "1. Ý nghĩa thực tiễn & Ảnh hưởng tương hỗ trong phân tử Phenol",
-              "content": [
-                "💡 Ý NGHĨA THỰC TIỄN CỦA PHENOL:",
-                "– Phenol là chất sát trùng ngoại khoa đầu tiên trong lịch sử y học do bác sĩ Joseph Lister ứng dụng, giảm tỉ lệ tử vong sau phẫu thuật.",
-                "– Sản xuất nhựa poly(phenol - formaldehyde) (PPF / Bakelite) làm vỏ thiết bị điện, tay cầm xoong chảo cách điện cách nhiệt, chất dẻo công nghiệp.",
-                "– Định nghĩa: Hợp chất hữu cơ chứa nhóm -OH liên kết TRỰC TIẾP với nguyên tử carbon của vòng benzene.",
-                "🔍 GIẢI THÍCH BẢN CHẤT ẢNH HƯỞNG TƯƠNG HỖ:",
-                "  1. Vòng benzene hút electron từ nguyên tử O (do hiệu ứng liên hợp p-π) → Làm mật độ electron trên O giảm → Liên kết O-H phân cực mạnh hơn nhiều so với alcohol → Phenol có TÍNH ACID YẾU (tan trong kiềm NaOH).",
-                "  2. Nhóm -OH đẩy electron vào vòng benzene qua hiệu ứng cộng hưởng → Làm mật độ electron ở các vị trí ortho và para tăng lên vượt bậc → Phản ứng THẾ NHÂN THƠM xảy ra cực kì dễ dàng ngay ở điều kiện êm dịu."
-              ]
-            },
-            {
-              "heading": "2. Tính chất hóa học đặc trưng của Phenol & Phản ứng nhận biết",
-              "content": [
-                "⚡ CÁC PHƯƠNG TRÌNH PHẢN ỨNG MINH HỌA:",
-                "  1. Tính acid yếu (Acid carbonic H₂CO₃ đẩy được phenol ra khỏi muối phenolate):",
-                "     C₆H₅OH + NaOH → C₆H₅ONa (sodium phenolate) + H₂O",
-                "     C₆H₅ONa + CO₂ + H₂O → C₆H₅OH↓ (vẩn đục) + NaHCO₃",
-                "     🔍 Chú ý: Phenol là acid yếu hơn H₂CO₃ nên KHÔNG làm đổi màu quỳ tím và KHÔNG phản ứng với muối NaHCO₃/Na₂CO₃.",
-                "  2. Phản ứng thế nhân thơm (Thuốc thử nhận biết Phenol):",
-                "     • Tác dụng với dung dịch Bromine (tạo kết tủa trắng ngay lập tức):",
-                "       C₆H₅OH + 3Br₂ → 2,4,6-tribromophenol↓ (kết tủa trắng) + 3HBr",
-                "     • Tác dụng với HNO₃ đặc (xúc tác H₂SO₄ đặc) tạo acid picric:",
-                "       C₆H₅OH + 3HNO₃(đặc) →(H₂SO₄ đặc) 2,4,6-trinitrophenol↓ (vàng) + 3H₂O  (Thuốc nổ picric)."
-              ]
-            }
-          ]
-        }
-      ]
+      id: "hk2_11_p3",
+      label: "Phần 3/7: Phenol – Tính acid, Phản ứng thế nhân thơm & Ôn tập Chương 5 (Bài 21, 22)",
+      builder: function(H) {
+        const { P, Chapter, Bai, Section, Sub, Bullet, NoteBox, Example, CheckQuestions, ChapterIntro, DataTable, Img, spacer, Eq, AlignmentType } = H;
+        const children = [];
+        
+children.push(Bai("Bài 21. Phenol"));
+children.push(Section("I. Cấu tạo phân tử"));
+children.push(P("**Phenol** là những hợp chất hữu cơ trong phân tử có nhóm hydroxyl (**–OH**) liên kết **trực tiếp với nguyên tử carbon của vòng benzene**. Phân tử phenol đơn giản nhất: **C6H5OH**."));
+children.push(Sub("Giải thích tương tác giữa nhóm –OH và vòng benzene"));
+children.push(P("Cặp electron tự do trên nguyên tử oxygen liên hợp với hệ electron pi của vòng benzene, làm mật độ electron dịch chuyển về phía vòng (đặc biệt ở các vị trí ortho và para). Kết quả là: **liên kết O–H phân cực mạnh hơn** (dễ phân li H⁺ hơn alcohol → phenol có tính acid yếu); đồng thời **mật độ electron trên vòng benzene tăng lên** (phản ứng thế vào nhân thơm của phenol diễn ra dễ dàng hơn benzene rất nhiều)."));
+children.push(Section("II. Tính chất hoá học"));
+children.push(Sub("1. Tính acid của phenol"));
+children.push(P("Phenol có tính acid yếu (lực acid mạnh hơn alcohol nhưng **yếu hơn acid carbonic H2CO3**), làm quỳ tím không đổi màu nhưng phản ứng được với dung dịch kiềm:"));
+children.push(Eq("C₆H₅OH  +  NaOH  →  C₆H₅ONa (sodium phenolate, tan)  +  H₂O"));
+children.push(Eq("C₆H₅ONa  +  CO₂  +  H₂O  →  C₆H₅OH (vẩn đục)  +  NaHCO₃  (H2CO3 đẩy phenol ra khỏi muối)"));
+children.push(Sub("2. Phản ứng thế ở nhân thơm (tác dụng với nước bromine và HNO3)"));
+children.push(P("Do ảnh hưởng của nhóm –OH, phản ứng thế vào nhân thơm xảy ra rất dễ dàng ở nhiệt độ thường, ưu tiên vào các vị trí **2, 4, 6 (ortho và para)**:"));
+children.push(Eq("C₆H₅OH  +  3Br₂  →  2,4,6-tribromophenol↓ (kết tủa trắng)  +  3HBr   (phản ứng nhận biết phenol)"));
+children.push(Eq("C₆H₅OH  +  3HNO₃ (đặc)  →(H2SO4 đặc, t°)  2,4,6-trinitrophenol (picric acid↓ vàng)  +  3H₂O"));
+
+children.push(Bai("Bài 22. Ôn tập Chương 5"));
+children.push(DataTable(
+  ["Hợp chất", "Cấu tạo nhóm chức", "Phản ứng với Na", "Phản ứng với NaOH", "Phản ứng với nước Br2"],
+  [
+    ["Alcohol (C2H5OH)", "–OH liên kết C no", "Có (giải phóng H2)", "Không phản ứng", "Không làm mất màu"],
+    ["Phenol (C6H5OH)", "–OH liên kết vòng thơm", "Có (giải phóng H2)", "Có (tạo C6H5ONa)", "Tạo kết tủa trắng 2,4,6-tribromophenol"]
+  ]
+));
+children.push(spacer());
+children.push(CheckQuestions("Tự kiểm tra nhanh", [
+  { q: "Nêu phương pháp phân biệt 3 chất lỏng không màu: benzene, ethanol và phenol.", a: "Dùng nước bromine: phenol tạo kết tủa trắng. Hai chất còn lại cho tác dụng với Na kim loại: ethanol có sủi bọt khí H2, benzene không có hiện tượng." }
+]));
+
+        return children;
+      }
     },
     {
-      "id": "hk2_11_p4",
-      "label": "Phần 4/7: Hợp chất Carbonyl – Aldehyde & Ketone: Danh pháp, Tính khử & Iodoform (Bài 23)",
-      "chapters": [
-        {
-          "title": "CHƯƠNG 6: HỢP CHẤT CARBONYL – CARBOXYLIC ACID – BÀI 23: HỢP CHẤT CARBONYL",
-          "sections": [
-            {
-              "heading": "1. Ý nghĩa thực tiễn & Cấu tạo nhóm Carbonyl (>C=O)",
-              "content": [
-                "💡 Ý NGHĨA THỰC TIỄN CỦA CARBONYL:",
-                "– Formaldehyde (HCHO): Dung dịch formalin 37-40% dùng ướp xác, ngâm mẫu giải phẫu sinh học chống thối rữa; tổng hợp nhựa dán gỗ công nghiệp ép dăm.",
-                "– Acetone (CH₃COCH₃): Dung dịch tẩy sơn móng tay, dung môi công nghiệp hòa tan sơn dầu và chất béo.",
-                "– Hương liệu tự nhiên: Cinnamaldehyde trong vỏ quế; Vanillin trong quả vani; Benzaldehyde mùi quả hạnh nhân trong bánh ngọt.",
-                "– Cấu tạo: Nhóm carbonyl >C=O phân cực mạnh (>C(δ+) = O(δ-)) do độ âm điện của O (3,44) lớn hơn C (2,55).",
-                "  • Aldehyde: Nhóm -CH=O liên kết với gốc C hoặc H (R-CHO). Đuôi IUPAC: -al.",
-                "  • Ketone: Nhóm >C=O liên kết với 2 gốc C (R-CO-R'). Đuôi IUPAC: -one."
-              ]
-            },
-            {
-              "heading": "2. Tính chất hóa học: Phản ứng khử, Tráng bạc & Phản ứng Iodoform",
-              "content": [
-                "⚡ CÁC PHƯƠNG TRÌNH PHẢN ỨNG MINH HỌA:",
-                "  1. Phản ứng khử (cộng H₂ xúc tác Ni, t° hoặc tác dụng NaBH₄):",
-                "     CH₃-CHO + H₂ →(Ni, t°) CH₃-CH₂-OH (Alcohol bậc I)",
-                "     CH₃-CO-CH₃ + H₂ →(Ni, t°) CH₃-CH(OH)-CH₃ (Alcohol bậc II)",
-                "  2. Phản ứng oxi hóa Aldehyde (Tính khử đặc trưng phân biệt với Ketone):",
-                "     • Phản ứng tráng bạc với thuốc thử Tollens ([Ag(NH₃)₂]OH):",
-                "       R-CHO + 2[Ag(NH₃)₂]OH →(t°) R-COONH₄ + 2Ag↓ (bạc sáng bóng bám thành ống nghiệm) + 3NH₃ + H₂O",
-                "       Riêng HCHO tạo 4 mol Ag: HCHO + 4[Ag(NH₃)₂]OH → (NH₄)₂CO₃ + 4Ag↓ + 6NH₃ + 2H₂O",
-                "     • Phản ứng với Cu(OH)₂ trong kiềm đun nóng:",
-                "       CH₃-CHO + 2Cu(OH)₂ + NaOH →(t°) CH₃-COONa + Cu₂O↓ (kết tủa đỏ gạch) + 3H₂O",
-                "     • Làm mất màu nước Bromine: R-CHO + Br₂ + H₂O → R-COOH + 2HBr",
-                "  3. Phản ứng tạo Iodoform (Nhận biết nhóm CH₃-C=O hoặc CH₃-CH(OH)-):",
-                "     CH₃-CHO + 3I₂ + 4NaOH → CHI₃↓ (kết tủa màu vàng nhạt, mùi sát trùng) + HCOONa + 3NaI + 3H₂O",
-                "     CH₃-CO-CH₃ + 3I₂ + 4NaOH → CHI₃↓ (vàng) + CH₃COONa + 3NaI + 3H₂O"
-              ]
-            }
-          ]
-        }
-      ]
+      id: "hk2_11_p4",
+      label: "Phần 4/7: Hợp chất Carbonyl – Cấu tạo nhóm C=O & Phản ứng cộng nucleophile (Bài 23A)",
+      builder: function(H) {
+        const { P, Chapter, Bai, Section, Sub, Bullet, NoteBox, Example, CheckQuestions, ChapterIntro, DataTable, Img, spacer, Eq, AlignmentType } = H;
+        const children = [];
+        
+children.push(Chapter("CHƯƠNG 6: HỢP CHẤT CARBONYL – CARBOXYLIC ACID"));
+children.push(ChapterIntro("Ý nghĩa thực tiễn", [
+  "**Hợp chất carbonyl (formaldehyde, acetaldehyde, acetone)** là nguyên liệu sản xuất sơn, keo dán công nghiệp, chất dẻo formandehit và dung môi tẩy rửa móng tay.",
+  "**Carboxylic acid (acetic acid - giấm ăn)** là gia vị ẩm thực, chất bảo quản thực phẩm, nguyên liệu sản xuất tơ nhân tạo tơ axetat và dược phẩm aspirin.",
+  "Mùi thơm đặc trưng của nhiều loại hoa quả, bơ sữa lên men là sản phẩm kết hợp giữa carboxylic acid và alcohol."
+]));
+children.push(spacer());
+
+children.push(Bai("Bài 23. Hợp chất Carbonyl (Phần 1: Cấu tạo và Phản ứng cộng)"));
+children.push(Section("I. Khái niệm và cấu tạo nhóm carbonyl"));
+children.push(P("**Hợp chất carbonyl** là các hợp chất hữu cơ trong phân tử có chứa nhóm carbonyl (**>C=O**)."));
+children.push(...Bullet([
+  "**Aldehyde:** nhóm –CH=O liên kết trực tiếp với nguyên tử C hoặc H (Ví dụ: HCHO, CH3CHO).",
+  "**Ketone:** nhóm >C=O liên kết trực tiếp với hai gốc hydrocarbon (Ví dụ: CH3-CO-CH3, CH3-CO-C6H5)."
+]));
+children.push(Sub("Giải thích tính phân cực của nhóm carbonyl"));
+children.push(P("Liên kết đôi C=O gồm 1 liên kết σ bền và 1 liên kết π kém bền. Do nguyên tử oxygen có độ âm điện lớn hơn carbon rất nhiều (3,44 so với 2,55), cặp electron liên kết bị hút mạnh về phía oxygen, làm cho **nguyên tử carbon mang một phần điện tích dương (δ+)** và **nguyên tử oxygen mang một phần điện tích âm (δ–)**. Do đó, nhóm carbonyl rất **dễ bị tấn công bởi các tác nhân nucleophile** (mang điện âm) vào nguyên tử carbon."));
+children.push(Section("II. Phản ứng cộng nucleophile vào nhóm C=O"));
+children.push(Eq("**Cộng HCN tạo cyanohydrin:**  CH₃-CHO  +  HCN  →  CH₃-CH(OH)-CN"));
+children.push(Eq("**Cộng NaHSO3:**  CH₃-CHO  +  NaHSO₃  →  CH₃-CH(OH)-SO₃Na (kết tủa tinh thể trắng, dùng tinh chế aldehyde)"));
+children.push(Section("III. Phản ứng tạo iodoform (Phản ứng haloform)"));
+children.push(P("Các hợp chất có nhóm **CH3-C=O** (acetaldehyde và methyl ketone) phản ứng với I2 trong dung dịch kiềm (NaOH) tạo **kết tủa màu vàng iodoform (CHI3)** có mùi sát trùng đặc trưng:"));
+children.push(Eq("CH₃-CO-CH₃  +  3I₂  +  4NaOH  →  CHI₃↓ (vàng nhạt)  +  CH₃COONa  +  3NaI  +  3H₂O"));
+children.push(NoteBox("Ý nghĩa", [
+  "Phản ứng tạo iodoform là phép thử đặc trưng dùng để **nhận biết các hợp chất có chứa nhóm CH3–CO–** (như acetaldehyde, acetone...)."
+]));
+
+        return children;
+      }
     },
     {
-      "id": "hk2_11_p5",
-      "label": "Phần 5/7: Carboxylic Acid – Cấu tạo nhóm -COOH, Tính acid & Phản ứng Ester hóa (Bài 24)",
-      "chapters": [
-        {
-          "title": "CHƯƠNG 6: BÀI 24 – CARBOXYLIC ACID (R-COOH)",
-          "sections": [
-            {
-              "heading": "1. Ý nghĩa thực tiễn & Cấu tạo nhóm Carboxyl (-COOH)",
-              "content": [
-                "💡 Ý NGHĨA THỰC TIỄN CỦA CARBOXYLIC ACID:",
-                "– Axit axetic (CH₃COOH): Thành phần chính của giấm ăn (nồng độ 2 – 5%), gia vị nấu nướng hàng ngày; sản xuất tơ acetate, phẩm nhuộm, dược phẩm aspirin hạ sốt.",
-                "– Axit citric: Có nhiều trong quả chanh, bưởi, cam; tạo vị chua thanh dịu trong nước giải khát.",
-                "– Axit lactic: Tạo nên vị chua thanh mát của sữa chua, nem chua, dưa muối lên men lactic.",
-                "– Cấu tạo: Nhóm carboxyl (-COOH) gồm nhóm carbonyl (>C=O) liên kết trực tiếp với nhóm hydroxy (-OH).",
-                "🔍 GIẢI THÍCH BẢN CHẤT NHIỆT ĐỘ SÔI CAO NHẤT:",
-                "– Phân tử acid carboxylic tạo thành liên kết hydrogen liên phân tử dạng dimer vòng đôi cực kì bền vững giữa nguyên tử O của nhóm C=O và nguyên tử H của nhóm O-H của hai phân tử acid. Do đó, carboxylic acid có nhiệt độ sôi cao hơn cả alcohol có cùng số nguyên tử carbon!"
-              ]
-            },
-            {
-              "heading": "2. Tính chất hóa học: Tính acid & Phản ứng Ester hóa",
-              "content": [
-                "⚡ CÁC PHƯƠNG TRÌNH PHẢN ỨNG MINH HỌA:",
-                "  1. Tính acid (Làm đỏ quỳ tím, tác dụng kim loại trước H, base, oxide base, muối):",
-                "     2CH₃COOH + Mg → (CH₃COO)₂Mg + H₂↑",
-                "     CH₃COOH + NaOH → CH₃COONa + H₂O",
-                "     2CH₃COOH + CaCO₃ → (CH₃COO)₂Ca + CO₂↑ + H₂O  (Dùng giấm ăn tẩy cặn canxi ấm đun nước!)",
-                "     CH₃COOH + NaHCO₃ → CH₃COONa + CO₂↑ + H₂O",
-                "  2. Phản ứng Ester hóa (Phản ứng thuận nghịch giữa Acid và Alcohol):",
-                "     CH₃COOH + C₂H₅OH ⇌(H₂SO₄ đặc, t°) CH₃COOC₂H₅ (ethyl acetate mùi thơm hoa quả) + H₂O",
-                "     🔍 VAI TRÒ CỦA H₂SO₄ ĐẶC: Vừa đóng vai trò chất xúc tác làm tăng tốc độ phản ứng, vừa đóng vai trò chất háo nước hút H₂O làm cân bằng chuyển dịch theo chiều thuận tạo nhiều ester hơn!"
-              ]
-            }
-          ]
-        }
-      ]
+      id: "hk2_11_p5",
+      label: "Phần 5/7: Aldehyde & Ketone – Phản ứng tráng bạc, Cu(OH)2 & Iodoform (Bài 23B)",
+      builder: function(H) {
+        const { P, Chapter, Bai, Section, Sub, Bullet, NoteBox, Example, CheckQuestions, ChapterIntro, DataTable, Img, spacer, Eq, AlignmentType } = H;
+        const children = [];
+        
+children.push(Bai("Bài 23. Hợp chất Carbonyl (Phần 2: Tính oxi hoá, Tính khử & Nhận biết)"));
+children.push(Section("I. Phản ứng oxi hoá aldehyde"));
+children.push(NoteBox("Đặc điểm quan trọng", [
+  "Aldehyde có nguyên tử H liên kết trực tiếp với nhóm C=O nên **rất dễ bị oxi hoá** thành carboxylic acid.",
+  "Ketone không có H gắn vào C=O nên **rất khó bị oxi hoá** bởi các tác nhân oxi hoá thông thường — đây là cơ sở để phân biệt aldehyde và ketone."
+]));
+children.push(Sub("1. Phản ứng tráng bạc (tác dụng với thuốc thử Tollens [Ag(NH3)2]OH)"));
+children.push(P("Dung dịch AgNO3 trong NH3 oxi hoá aldehyde thành muối ammonium, giải phóng kim loại Ag bám sáng bóng vào thành ống nghiệm:"));
+children.push(Eq("R-CHO  +  2[Ag(NH₃)₂]OH  →(t°)  R-COONH₄  +  2Ag↓ (sáng bóng như gương)  +  3NH₃  +  H₂O"));
+children.push(P("Riêng formaldehyde (HCHO) phản ứng theo tỉ lệ tạo **4Ag**:  HCHO + 4[Ag(NH3)2]OH → (NH4)2CO3 + 4Ag↓ + 6NH3 + 2H2O."));
+children.push(Sub("2. Phản ứng với Cu(OH)2 trong môi trường kiềm khi đun nóng"));
+children.push(P("Aldehyde khử Cu(OH)2 màu xanh lam thành **kết tủa đỏ gạch Cu2O**:"));
+children.push(Eq("R-CHO  +  2Cu(OH)₂  +  NaOH  →(t°)  R-COONa  +  Cu₂O↓ (đỏ gạch)  +  3H₂O"));
+children.push(Section("II. Phản ứng khử (hydro hoá)"));
+children.push(P("Cả aldehyde và ketone đều bị khử bởi H2 (xúc tác Ni, t°) tạo thành alcohol tương ứng:"));
+children.push(Eq("**Aldehyde bị khử tạo alcohol bậc I:**  R-CHO  +  H₂  →(Ni, t°)  R-CH₂-OH"));
+children.push(Eq("**Ketone bị khử tạo alcohol bậc II:**  R-CO-R'  +  H₂  →(Ni, t°)  R-CH(OH)-R'"));
+children.push(CheckQuestions("Tự kiểm tra nhanh", [
+  { q: "Vì sao thuốc thử Tollens và Cu(OH)2/OH- được dùng làm thuốc thử nhận biết aldehyde mà không nhận biết được ketone?", a: "Vì aldehyde có liên kết C-H ở nhóm carbonyl nên có tính khử mạnh, dễ bị oxi hoá bởi thuốc thử Tollens (tạo Ag) và Cu(OH)2 (tạo Cu2O đỏ gạch), trong khi ketone không có H gắn vào carbonyl nên bền vững, không phản ứng." }
+]));
+
+        return children;
+      }
     },
     {
-      "id": "hk2_11_p6",
-      "label": "Phần 6/7: Ôn tập Chương 6 & Chuyên đề Thực hành Hóa học hữu cơ (Bài 25 & CĐ 11.2)",
-      "chapters": [
-        {
-          "title": "CHƯƠNG 6: BÀI 25 & CỤM CHUYÊN ĐỀ 11.2 – TRẢI NGHIỆM THỰC HÀNH HỮU CƠ",
-          "sections": [
-            {
-              "heading": "1. Sơ đồ xâu chuỗi chuyển hóa các nhóm chức hữu cơ",
-              "content": [
-                "– Chuỗi chuyển hóa toàn diện:",
-                "  Alkane →(cracking) Alkene →(+ H₂O, H⁺) Alcohol bậc I →(CuO, t°) Aldehyde →(Tollens / Cu(OH)₂) Carboxylic acid →(+ Alcohol) Ester.",
-                "  Alkene →(+ H₂O, H⁺) Alcohol bậc II →(CuO, t°) Ketone."
-              ]
-            },
-            {
-              "heading": "2. Cụm Chuyên đề 11.2: Trải nghiệm thực hành hóa học hữu cơ",
-              "content": [
-                "– 1. Tách tinh dầu tự nhiên (tinh dầu sả, bưởi, chanh, quế):",
-                "  • Phương pháp: Chưng cất lôi cuốn hơi nước. Tinh dầu nhẹ hơn nước nổi lên trên bề mặt, sau đó dùng phễu chiết tách riêng lớp tinh dầu nguyên chất.",
-                "– 2. Chuyển hóa chất béo thành xà phòng (Xà phòng hóa):",
-                "  • Tiến hành: Đun sôi mỡ động vật hoặc dầu dừa với dung dịch NaOH trong bát sứ khoảng 30 phút.",
-                "  • Thêm dung dịch bão hòa NaCl: Muối NaCl làm tăng tỉ khối dung dịch, làm giảm độ tan của muối natri của acid béo (xà phòng), giúp xà phòng kết tinh nổi lên trên bề mặt dễ vớt ra ép khuôn."
-              ]
-            }
-          ]
-        }
-      ]
+      id: "hk2_11_p6",
+      label: "Phần 6/7: Carboxylic acid – Cấu tạo, Tính acid & Phản ứng ester hóa (Bài 24)",
+      builder: function(H) {
+        const { P, Chapter, Bai, Section, Sub, Bullet, NoteBox, Example, CheckQuestions, ChapterIntro, DataTable, Img, spacer, Eq, AlignmentType } = H;
+        const children = [];
+        
+children.push(Bai("Bài 24. Carboxylic acid"));
+children.push(Section("I. Cấu tạo nhóm carboxyl và tính chất vật lí"));
+children.push(P("**Carboxylic acid** là hợp chất hữu cơ trong phân tử có chứa nhóm carboxyl (**–COOH**) liên kết trực tiếp với nguyên tử C hoặc H. Công thức chung acid no, đơn chức, mạch hở: **CnH2n+1COOH** (n ≥ 0)."));
+children.push(Sub("Giải thích nhiệt độ sôi cao của Carboxylic acid"));
+children.push(P("Trong nhóm –COOH, nhóm C=O hút electron làm cho liên kết O–H phân cực mạnh hơn cả trong alcohol. Giữa các phân tử carboxylic acid hình thành **liên kết hydrogen liên phân tử dạng dimer (nhị hợp) rất bền**. Vì vậy, carboxylic acid có **nhiệt độ sôi cao hơn hẳn alcohol có cùng phân tử khối** (Ví dụ: CH3COOH sôi ở 118 °C, trong khi C2H5OH có cùng M = 46/60 chỉ sôi ở 78,3 °C)."));
+children.push(Section("II. Tính chất hoá học"));
+children.push(Sub("1. Tính acid"));
+children.push(P("Carboxylic acid là các acid yếu nhưng mang đầy đủ tính chất của một acid: làm **quỳ tím hoá đỏ**, phản ứng với kim loại trước H, oxide base, base và muối của acid yếu hơn:"));
+children.push(Eq("2CH₃COOH  +  Mg  →  (CH₃COO)₂Mg  +  H₂↑"));
+children.push(Eq("CH₃COOH  +  NaOH  →  CH₃COONa  +  H₂O"));
+children.push(Eq("2CH₃COOH  +  CaCO₃  →  (CH₃COO)₂Ca  +  CO₂↑  +  H₂O  (sủi bọt khí CO2)"));
+children.push(Sub("2. Phản ứng ester hoá (với alcohol)"));
+children.push(P("Carboxylic acid phản ứng với alcohol khi có mặt xúc tác H2SO4 đặc đun nóng tạo thành ester:"));
+children.push(Eq("CH₃COOH  +  C₂H₅OH  ⇌(H2SO4 đặc, t°)  CH₃COOC₂H₅ (ethyl acetate, mùi thơm)  +  H₂O"));
+children.push(Example("Ví dụ minh hoạ", [
+  "Nêu hiện tượng khi cho giấm ăn (chứa khoảng 5% CH3COOH) vào vỏ trứng gà (chứa chủ yếu CaCO3).",
+  "Lời giải: Có hiện tượng sủi bọt khí CO2 không màu thoát ra và vỏ trứng tan dần: 2CH3COOH + CaCO3 → (CH3COO)2Ca + CO2↑ + H2O."
+]));
+
+        return children;
+      }
     },
     {
-      "id": "hk2_11_p7",
-      "label": "Phần 7/7: Ôn tập tổng hợp lý thuyết trọng tâm Học kì 2 – Hóa học 11",
-      "chapters": [
-        {
-          "title": "TỔNG KẾT TOÀN DIỆN LÝ THUYẾT HỌC KÌ 2 – HÓA HỌC 11",
-          "sections": [
-            {
-              "heading": "1. Bảng nhận biết các hợp chất hữu cơ có nhóm chức",
-              "content": [
-                "– Polyol kề nhau (Glycerol): Dung dịch Cu(OH)₂ ở nhiệt độ thường → dung dịch màu xanh lam thẫm.",
-                "– Phenol: Nước Bromine → kết tủa trắng 2,4,6-tribromophenol; tan trong dung dịch kiềm NaOH.",
-                "– Aldehyde: Thuốc thử Tollens [Ag(NH₃)₂]OH → tráng lớp bạc Ag sáng bóng; Cu(OH)₂/NaOH đun nóng → kết tủa đỏ gạch Cu₂O.",
-                "– Ketone có nhóm methyl: Phản ứng Iodoform với I₂/NaOH → kết tủa màu vàng nhạt CHI₃.",
-                "– Carboxylic acid: Dung dịch NaHCO₃ hoặc Na₂CO₃ → sủi bọt khí CO₂; làm đỏ quỳ tím."
-              ]
-            }
-          ]
-        }
-      ]
+      id: "hk2_11_p7",
+      label: "Phần 7/7: So sánh toàn diện Alcohol, Phenol, Acid & Ôn tập Chương 6 (Bài 25)",
+      builder: function(H) {
+        const { P, Chapter, Bai, Section, Sub, Bullet, NoteBox, Example, CheckQuestions, ChapterIntro, DataTable, Img, spacer, Eq, AlignmentType } = H;
+        const children = [];
+        
+children.push(Bai("Bài 25. Ôn tập Chương 6 & So sánh toàn diện Dẫn xuất chứa Oxygen"));
+children.push(DataTable(
+  ["Hợp chất", "Nhóm chức", "Tính acid", "Nhiệt độ sôi so sánh (cùng số C)", "Thuốc thử nhận biết đặc trưng"],
+  [
+    ["Alcohol", "–OH (gắn C no)", "Rất yếu (không làm đổi màu quỳ)", "Thấp hơn carboxylic acid", "Na (sủi bọt khí H2); Cu(OH)2 (polyalcol xanh lam)"],
+    ["Phenol", "–OH (gắn vòng thơm)", "Yếu (không đổi màu quỳ, tan trong NaOH)", "Cao", "Nước bromine (kết tủa trắng 2,4,6-tribromophenol)"],
+    ["Aldehyde", "–CHO", "Trung tính", "Thấp hơn alcohol (không có liên kết H)", "Thuốc thử Tollens (tráng bạc Ag); Cu(OH)2/OH- (đỏ gạch)"],
+    ["Carboxylic acid", "–COOH", "Acid yếu (quỳ tím hoá đỏ, tan CaCO3)", "Cao nhất (liên kết H liên phân tử bền dimer)", "Quỳ tím hoá đỏ; sủi bọt khí CO2 với Na2CO3/CaCO3"]
+  ]
+));
+children.push(spacer());
+children.push(NoteBox("Thứ tự nhiệt độ sôi của các hợp chất có phân tử khối tương đương", [
+  "**Carboxylic acid  >  Alcohol  >  Aldehyde / Ketone  >  Ether  >  Hydrocarbon**",
+  "Nguyên nhân: Acid và alcohol tạo được liên kết hydrogen liên phân tử (acid bền hơn do tạo dimer); aldehyde/ketone phân cực nhưng không tạo được liên kết H liên phân tử; hydrocarbon không phân cực chỉ có lực van der Waals yếu."
+]));
+children.push(CheckQuestions("Tự kiểm tra nhanh", [
+  { q: "Sắp xếp theo thứ tự tính acid tăng dần của 3 chất: C2H5OH, C6H5OH và CH3COOH. Giải thích ngắn gọn.", a: "Thứ tự tính acid tăng dần: C2H5OH < C6H5OH < CH3COOH. Giải thích: C2H5OH không tác dụng NaOH; C6H5OH tác dụng được NaOH nhưng không tác dụng Na2CO3; CH3COOH tác dụng được cả NaOH và giải phóng khí CO2 từ muối Na2CO3." }
+]));
+
+        return children;
+      }
     }
   ]
 };
