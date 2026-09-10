@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle, Table, TableRow, TableCell, WidthType, ShadingType } = require('docx');
+const fs = require('fs');
+const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle, Table, TableRow, TableCell, WidthType, ShadingType, ImageRun } = require('docx');
 const chemistryContent = require('./chemistry-content');
 
 const app = express();
@@ -178,6 +179,47 @@ function generateDocumentForPart(grade, semester, partIndex) {
         heading: HeadingLevel.HEADING_2,
         spacing: { before: 240, after: 80 }
       }));
+
+      // Render image if present in section
+      if (section.image) {
+        const images = Array.isArray(section.image) ? section.image : [section.image];
+        images.forEach(imgObj => {
+          const imgRelPath = imgObj.path;
+          const fullPath = path.resolve(__dirname, imgRelPath);
+          if (fs.existsSync(fullPath)) {
+            try {
+              const imgData = fs.readFileSync(fullPath);
+              children.push(new Paragraph({
+                children: [new ImageRun({
+                  data: imgData,
+                  transformation: {
+                    width: imgObj.width || 480,
+                    height: imgObj.height || 260
+                  }
+                })],
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 140, after: 60 }
+              }));
+              if (imgObj.caption) {
+                children.push(new Paragraph({
+                  children: [new TextRun({
+                    text: imgObj.caption,
+                    italics: true,
+                    bold: true,
+                    size: 20,
+                    color: '595959',
+                    font: 'Times New Roman'
+                  })],
+                  alignment: AlignmentType.CENTER,
+                  spacing: { before: 30, after: 120 }
+                }));
+              }
+            } catch (err) {
+              console.error('Error rendering image:', err);
+            }
+          }
+        });
+      }
 
       // Content items
       section.content.forEach(item => {

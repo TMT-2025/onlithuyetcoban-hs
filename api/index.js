@@ -1,4 +1,6 @@
-const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle, Table, TableRow, TableCell, WidthType, ShadingType } = require('docx');
+const path = require('path');
+const fs = require('fs');
+const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle, Table, TableRow, TableCell, WidthType, ShadingType, ImageRun } = require('docx');
 const chemistryContent = require('../chemistry-content');
 
 // Helper: build DOCX document for part
@@ -88,6 +90,46 @@ function generateDocumentForPart(grade, semester, partIndex) {
         heading: HeadingLevel.HEADING_2,
         spacing: { before: 240, after: 80 }
       }));
+
+      // Render image if present in section
+      if (section.image) {
+        const images = Array.isArray(section.image) ? section.image : [section.image];
+        images.forEach(imgObj => {
+          const fullPath = path.resolve(__dirname, '..', imgObj.path);
+          if (fs.existsSync(fullPath)) {
+            try {
+              const imgData = fs.readFileSync(fullPath);
+              children.push(new Paragraph({
+                children: [new ImageRun({
+                  data: imgData,
+                  transformation: {
+                    width: imgObj.width || 480,
+                    height: imgObj.height || 260
+                  }
+                })],
+                alignment: AlignmentType.CENTER,
+                spacing: { before: 140, after: 60 }
+              }));
+              if (imgObj.caption) {
+                children.push(new Paragraph({
+                  children: [new TextRun({
+                    text: imgObj.caption,
+                    italics: true,
+                    bold: true,
+                    size: 20,
+                    color: '595959',
+                    font: 'Times New Roman'
+                  })],
+                  alignment: AlignmentType.CENTER,
+                  spacing: { before: 30, after: 120 }
+                }));
+              }
+            } catch (err) {
+              console.error('Error rendering image:', err);
+            }
+          }
+        });
+      }
 
       section.content.forEach(item => {
         const trimmed = item.trim();
@@ -215,7 +257,7 @@ function generateDocumentForPart(grade, semester, partIndex) {
   });
 }
 
-module.exports = async function handler(req, res) {
+async function handler(req, res) {
   // Parse URL & queries
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   const pathname = url.pathname;
@@ -301,3 +343,7 @@ module.exports = async function handler(req, res) {
 
   return res.status(200).json({ status: 'ok', message: 'API Ôn tập Lý thuyết Hóa học THPT' });
 };
+
+handler.generateDocumentForPart = generateDocumentForPart;
+module.exports = handler;
+
