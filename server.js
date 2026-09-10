@@ -181,11 +181,14 @@ function generateDocumentForPart(grade, semester, partIndex) {
       }));
 
       // Render image if present in section
-      if (section.image) {
-        const images = Array.isArray(section.image) ? section.image : [section.image];
+      if (section.image || section.images) {
+        const rawImages = section.images || section.image;
+        const images = Array.isArray(rawImages) ? rawImages : [rawImages];
         images.forEach(imgObj => {
-          const imgRelPath = imgObj.path;
-          const fullPath = path.resolve(__dirname, imgRelPath);
+          let fullPath = path.resolve(__dirname, imgObj.path);
+          if (!fs.existsSync(fullPath)) {
+            fullPath = path.resolve(process.cwd(), imgObj.path);
+          }
           if (fs.existsSync(fullPath)) {
             try {
               const imgData = fs.readFileSync(fullPath);
