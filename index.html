@@ -879,33 +879,61 @@
       document.head.appendChild(style);
     }
 
+    const downloadUrl = `/api/download?grade=${selectedGrade}&semester=${selectedSem}&part=${index}`;
+
     try {
-      const url = `/api/download?grade=${selectedGrade}&semester=${selectedSem}&part=${index}`;
-      const response = await fetch(url);
+      const response = await fetch(downloadUrl);
 
       if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Download failed');
+        let errorMsg = 'Tải file thất bại';
+        try {
+          const err = await response.json();
+          errorMsg = err.error || errorMsg;
+        } catch (e) {}
+        throw new Error(errorMsg);
+      }
+
+      const contentType = response.headers.get('Content-Type') || '';
+      if (contentType.includes('application/json')) {
+        const json = await response.json();
+        throw new Error(json.error || 'Máy chủ trả về dữ liệu không hợp lệ');
       }
 
       const blob = await response.blob();
-      const downloadUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-
-      // Get filename from header
-      const disposition = response.headers.get('Content-Disposition');
-      let filename = `LyThuyetHoa${selectedGrade}_HK${selectedSem}_Phan${index + 1}.docx`;
-      if (disposition) {
-        const match = disposition.match(/filename\*=UTF-8''(.+)/);
-        if (match) filename = decodeURIComponent(match[1]);
+      if (blob.size < 400) {
+        const text = await blob.text();
+        try {
+          const json = JSON.parse(text);
+          throw new Error(json.error || 'Dung lượng file không hợp lệ');
+        } catch (e) {
+          if (e.message !== 'Dung lượng file không hợp lệ') throw e;
+        }
       }
 
+      // Extract filename
+      let filename = `LyThuyetHoa${selectedGrade}_HK${selectedSem}_Phan${index + 1}.docx`;
+      const disposition = response.headers.get('Content-Disposition');
+      if (disposition) {
+        const matchUtf8 = disposition.match(/filename\*=UTF-8''([^;]+)/i);
+        if (matchUtf8) {
+          filename = decodeURIComponent(matchUtf8[1]);
+        } else {
+          const matchAscii = disposition.match(/filename="?([^";]+)"?/i);
+          if (matchAscii) filename = matchAscii[1];
+        }
+      }
+
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = blobUrl;
       a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      URL.revokeObjectURL(downloadUrl);
+
+      // Keep blobUrl alive for 60s so browser finishes download
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
 
       btn.classList.remove('loading');
       btn.classList.add('success');
@@ -921,14 +949,36 @@
       }, 3000);
 
     } catch (err) {
-      btn.classList.remove('loading');
-      btn.classList.add('error');
-      btn.innerHTML = `⚠️ Lỗi`;
-      showNotification('Lỗi tải file: ' + err.message, 'error');
-      setTimeout(() => {
-        btn.classList.remove('error');
-        btn.innerHTML = originalHtml;
-      }, 3000);
+      console.warn('Blob fetch download failed, falling back to direct navigation:', err);
+      try {
+        // Fallback: direct iframe download
+        const hiddenIframe = document.createElement('iframe');
+        hiddenIframe.style.display = 'none';
+        hiddenIframe.src = downloadUrl;
+        document.body.appendChild(hiddenIframe);
+        setTimeout(() => document.body.removeChild(hiddenIframe), 30000);
+
+        btn.classList.remove('loading');
+        btn.classList.add('success');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg> Đang tải về`;
+        showNotification(`📥 Đang tải về phần ${index + 1}...`, 'success');
+
+        setTimeout(() => {
+          btn.classList.remove('success');
+          btn.innerHTML = originalHtml;
+        }, 3000);
+      } catch (fallbackErr) {
+        btn.classList.remove('loading');
+        btn.classList.add('error');
+        btn.innerHTML = `⚠️ Lỗi`;
+        showNotification('Lỗi tải file: ' + err.message, 'error');
+        setTimeout(() => {
+          btn.classList.remove('error');
+          btn.innerHTML = originalHtml;
+        }, 3000);
+      }
     }
   }
 

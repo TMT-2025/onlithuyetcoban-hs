@@ -1,108 +1,21 @@
-const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle, Table, TableRow, TableCell, WidthType, ShadingType, ImageRun } = require('docx');
-const chemistryContent = require('./chemistry-content');
+const chemistryContent = require('../chemistry-content');
 
-const app = express();
-const PORT = 3007;
-
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Serve main page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// API: get available parts for a grade and semester
-app.get('/api/parts', (req, res) => {
-  const { grade, semester } = req.query;
-  const gradeNum = parseInt(grade);
-  const semKey = semester === '1' ? 'hk1' : 'hk2';
-
-  if (!chemistryContent[gradeNum] || !chemistryContent[gradeNum][semKey]) {
-    return res.status(404).json({ error: 'Không tìm thấy nội dung' });
-  }
-
-  const content = chemistryContent[gradeNum][semKey];
-  const parts = content.parts.map(p => ({
-    id: p.id,
-    label: p.label
-  }));
-
-  res.json({
-    title: content.title,
-    subtitle: content.subtitle,
-    totalParts: parts.length,
-    parts
-  });
-});
-
-// Helper: create styled paragraph
-function createParagraph(text, options = {}) {
-  const {
-    heading = null,
-    bold = false,
-    italic = false,
-    size = 24, // half-points (24 = 12pt)
-    color = '000000',
-    indent = 0,
-    spacing = {}
-  } = options;
-
-  const runs = [];
-
-  if (typeof text === 'string') {
-    runs.push(new TextRun({
-      text,
-      bold,
-      italic,
-      size,
-      color,
-      font: 'Times New Roman'
-    }));
-  } else if (Array.isArray(text)) {
-    text.forEach(t => runs.push(new TextRun({
-      text: t.text || t,
-      bold: t.bold || bold,
-      italic: t.italic || italic,
-      size: t.size || size,
-      color: t.color || color,
-      font: 'Times New Roman'
-    })));
-  }
-
-  const paraOptions = {
-    children: runs,
-    spacing: {
-      before: spacing.before || 60,
-      after: spacing.after || 60,
-      line: spacing.line || 276, // 1.15 line spacing
-      lineRule: 'auto'
-    },
-    indent: indent ? { left: indent } : undefined
-  };
-
-  if (heading) {
-    paraOptions.heading = heading;
-  }
-
-  return new Paragraph(paraOptions);
-}
-
-// Generate document for a specific part
+// Helper: build DOCX document for part
 function generateDocumentForPart(grade, semester, partIndex) {
   const gradeNum = parseInt(grade);
   const semKey = semester === '1' ? 'hk1' : 'hk2';
-  const content = chemistryContent[gradeNum][semKey];
-  const part = content.parts[partIndex];
+  const content = chemistryContent[gradeNum] && chemistryContent[gradeNum][semKey];
 
+  if (!content) return null;
+  const part = content.parts[partIndex];
   if (!part) return null;
 
   const children = [];
 
-  // Cover section for this part
+  // Tiêu đề đầu trang
   children.push(new Paragraph({
     children: [new TextRun({
       text: content.title,
@@ -140,16 +53,15 @@ function generateDocumentForPart(grade, semester, partIndex) {
     spacing: { before: 100, after: 200 }
   }));
 
-  // Add a divider line
+  // Đường kẻ phân cách
   children.push(new Paragraph({
     children: [new TextRun({ text: '─'.repeat(60), size: 20, color: '888888', font: 'Times New Roman' })],
     alignment: AlignmentType.CENTER,
     spacing: { before: 60, after: 200 }
   }));
 
-  // Chapters content
+  // Các chương mục
   part.chapters.forEach(chapter => {
-    // Chapter title
     children.push(new Paragraph({
       children: [new TextRun({
         text: chapter.title,
@@ -167,7 +79,6 @@ function generateDocumentForPart(grade, semester, partIndex) {
     }));
 
     chapter.sections.forEach(section => {
-      // Section heading
       children.push(new Paragraph({
         children: [new TextRun({
           text: section.heading,
@@ -185,9 +96,12 @@ function generateDocumentForPart(grade, semester, partIndex) {
         const rawImages = section.images || section.image;
         const images = Array.isArray(rawImages) ? rawImages : [rawImages];
         images.forEach(imgObj => {
-          let fullPath = path.resolve(__dirname, imgObj.path);
+          let fullPath = path.resolve(__dirname, '..', imgObj.path);
           if (!fs.existsSync(fullPath)) {
             fullPath = path.resolve(process.cwd(), imgObj.path);
+          }
+          if (!fs.existsSync(fullPath)) {
+            fullPath = path.resolve(__dirname, imgObj.path);
           }
           if (fs.existsSync(fullPath)) {
             try {
@@ -224,11 +138,9 @@ function generateDocumentForPart(grade, semester, partIndex) {
         });
       }
 
-      // Content items
       section.content.forEach(item => {
         const trimmed = item.trim();
         if (!trimmed) {
-          // Empty line for spacing between sections
           children.push(new Paragraph({
             children: [new TextRun({ text: '', font: 'Times New Roman' })],
             spacing: { before: 60, after: 60 }
@@ -236,14 +148,12 @@ function generateDocumentForPart(grade, semester, partIndex) {
           return;
         }
 
-        // Check if it's a sub-item (starts with –, •, spaces, dashes, etc.)
         const isSubItem = trimmed.startsWith('–') || trimmed.startsWith('•') || 
                           trimmed.startsWith('-') || item.startsWith('  ');
         const isEquation = trimmed.includes('→') || trimmed.includes('⇌') || trimmed.includes('↑') || trimmed.includes('↓');
         const isSectionHeader = trimmed.startsWith('===');
 
         if (isSectionHeader) {
-          // Section sub-header (for summary tables)
           children.push(new Paragraph({
             children: [new TextRun({
               text: trimmed,
@@ -265,10 +175,9 @@ function generateDocumentForPart(grade, semester, partIndex) {
               italics: isEquation
             })],
             spacing: { before: 40, after: 40 },
-            indent: { left: 720 } // 0.5 inch indent for sub-items
+            indent: { left: 720 }
           }));
         } else if (isEquation && !trimmed.includes(':')) {
-          // Chemical equation
           children.push(new Paragraph({
             children: [new TextRun({
               text: trimmed,
@@ -282,7 +191,6 @@ function generateDocumentForPart(grade, semester, partIndex) {
             alignment: AlignmentType.LEFT
           }));
         } else {
-          // Regular content
           children.push(new Paragraph({
             children: [
               new TextRun({
@@ -307,7 +215,7 @@ function generateDocumentForPart(grade, semester, partIndex) {
     });
   });
 
-  // Footer note
+  // Footer ghi chú cuối tài liệu
   children.push(new Paragraph({
     children: [new TextRun({
       text: `Tài liệu ôn tập lý thuyết – Lớp ${grade} – ${semester === '1' ? 'Học kỳ 1' : 'Học kỳ 2'} – ${part.label}`,
@@ -322,7 +230,7 @@ function generateDocumentForPart(grade, semester, partIndex) {
 
   children.push(new Paragraph({
     children: [new TextRun({
-      text: 'Bộ sách: Kết nối tri thức với cuộc sống – Trường THCS-THPT Phan Văn Trị',
+      text: 'Bộ sách: Kết nối tri thức với cuộc sống – THCS-THPT Phan Văn Trị',
       italics: true,
       size: 20,
       color: '888888',
@@ -332,15 +240,15 @@ function generateDocumentForPart(grade, semester, partIndex) {
     spacing: { before: 60, after: 60 }
   }));
 
-  const doc = new Document({
+  return new Document({
     sections: [{
       properties: {
         page: {
           margin: {
-            top: 1134, // 2cm in twips (1cm = 567 twips)
-            right: 850, // 1.5cm
+            top: 1134,
+            right: 850,
             bottom: 1134,
-            left: 1700 // 3cm
+            left: 1700
           }
         }
       },
@@ -354,65 +262,6 @@ function generateDocumentForPart(grade, semester, partIndex) {
       }
     }
   });
-
-  return doc;
 }
 
-// API: generate and download DOCX for a specific part
-app.get('/api/download', async (req, res) => {
-  const { grade, semester, part } = req.query;
-  const gradeNum = parseInt(grade);
-  const semKey = semester === '1' ? 'hk1' : 'hk2';
-  const partIndex = parseInt(part) || 0;
-
-  if (!chemistryContent[gradeNum] || !chemistryContent[gradeNum][semKey]) {
-    return res.status(404).json({ error: 'Không tìm thấy nội dung' });
-  }
-
-  const content = chemistryContent[gradeNum][semKey];
-  if (partIndex >= content.parts.length) {
-    return res.status(404).json({ error: 'Phần không tồn tại' });
-  }
-
-  try {
-    const doc = generateDocumentForPart(grade, semester, partIndex);
-    if (!doc) {
-      return res.status(500).json({ error: 'Không thể tạo tài liệu' });
-    }
-
-    const buffer = await Packer.toBuffer(doc);
-    const partLabel = content.parts[partIndex].label.replace(/[^a-zA-Z0-9À-ỹ\s]/g, '').trim().substring(0, 40);
-    const filename = `LyThuyetHoa${grade}_HK${semester}_Phan${partIndex + 1}.docx`;
-
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
-    res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition, Content-Length');
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-    res.send(buffer);
-  } catch (err) {
-    console.error('Error generating document:', err);
-    res.status(500).json({ error: 'Lỗi khi tạo tài liệu: ' + err.message });
-  }
-});
-
-// API: get content info
-app.get('/api/info', (req, res) => {
-  const info = {};
-  [10, 11, 12].forEach(grade => {
-    info[grade] = {};
-    ['hk1', 'hk2'].forEach(sem => {
-      if (chemistryContent[grade] && chemistryContent[grade][sem]) {
-        info[grade][sem] = {
-          title: chemistryContent[grade][sem].title,
-          totalParts: chemistryContent[grade][sem].parts.length
-        };
-      }
-    });
-  });
-  res.json(info);
-});
-
-app.listen(PORT, () => {
-  console.log(`🧪 Ứng dụng Tài liệu Hóa học đang chạy tại: http://localhost:${PORT}`);
-  console.log(`📚 Hỗ trợ: Hóa 10, 11, 12 – HK1 và HK2`);
-  console.log(`📄 Mỗi học kỳ chia thành 7 phần tải xuống`);
-});
+module.exports = { generateDocumentForPart, Packer, chemistryContent };
