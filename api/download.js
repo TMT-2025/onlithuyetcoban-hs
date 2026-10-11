@@ -42,15 +42,19 @@ module.exports = async function handler(req, res) {
     }
 
     const buffer = await Packer.toBuffer(doc);
-    const filename = isAll 
-      ? 'LyThuyetHoa' + grade + '_HK' + semester + '_TronBoTatCaCacChuong.docx'
+    const asciiFilename = isAll 
+      ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
+      : `LyThuyetHoa${grade}_HK${semester}_Chuong${partIndex + 1}.docx`;
+    
+    const utf8Filename = isAll 
+      ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
       : (content.parts[partIndex] && content.parts[partIndex].label 
           ? content.parts[partIndex].label.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, '_') + '.docx'
-          : 'LyThuyetHoa' + grade + '_HK' + semester + '_Chuong' + (partIndex + 1) + '.docx');
+          : asciiFilename);
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-    res.setHeader('Content-Disposition', 'attachment; filename="' + filename + '"; filename*=UTF-8\'\'' + encodeURIComponent(filename));
+    res.setHeader('Content-Disposition', `attachment; filename="${asciiFilename}"; filename*=UTF-8''${encodeURIComponent(utf8Filename)}`);
     res.setHeader('Content-Length', buffer.length);
     res.setHeader('Cache-Control', 'no-cache');
 
