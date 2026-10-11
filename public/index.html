@@ -625,8 +625,11 @@
   <!-- Parts download section -->
   <div class="parts-section" id="partsSection">
     <div class="parts-header">
-      <span>📥</span>
-      <h2>Danh sách phần tải xuống</h2>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span>📥</span>
+        <h2>Danh sách phần tải xuống</h2>
+      </div>
+      <span class="badge" id="totalPartsText" style="margin-left:auto;font-size:13px;padding:6px 14px;background:#e0f2fe;color:#0369a1;border-radius:20px;font-weight:700;">0 phần</span>
     </div>
     <div class="parts-body">
       <div class="parts-desc">
@@ -825,12 +828,16 @@
 
       // Update info panel
       const infoPanel = document.getElementById('infoPanel');
-      document.getElementById('infoTitle').textContent = data.title;
-      document.getElementById('infoSubtitle').textContent = data.subtitle;
-      infoPanel.classList.add('visible');
+      const infoTitle = document.getElementById('infoTitle');
+      const infoSubtitle = document.getElementById('infoSubtitle');
+      const totalPartsEl = document.getElementById('totalPartsText');
+
+      if (infoTitle) infoTitle.textContent = data.title || '';
+      if (infoSubtitle) infoSubtitle.textContent = data.subtitle || '';
+      if (infoPanel) infoPanel.classList.add('visible');
 
       // Update total parts text
-      document.getElementById('totalPartsText').textContent = `${data.totalParts} phần`;
+      if (totalPartsEl) totalPartsEl.textContent = `${data.totalParts || (data.parts ? data.parts.length : 0)} phần`;
 
       // Render parts grid
       const grid = document.getElementById('partsGrid');
