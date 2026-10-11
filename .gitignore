@@ -13,3 +13,4 @@ output/
 *.zip
 backup/
 SAN PHAM/
+.vercel

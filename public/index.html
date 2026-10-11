@@ -626,14 +626,14 @@
   <div class="parts-section" id="partsSection">
     <div class="parts-header">
       <div style="display:flex;align-items:center;gap:10px;">
-        <span>📥</span>
-        <h2>Danh sách phần tải xuống</h2>
+        <span>📚</span>
+        <h2>Danh sách các Chương tải xuống</h2>
       </div>
-      <span class="badge" id="totalPartsText" style="margin-left:auto;font-size:13px;padding:6px 14px;background:#e0f2fe;color:#0369a1;border-radius:20px;font-weight:700;">0 phần</span>
+      <span class="badge" id="totalPartsText" style="margin-left:auto;font-size:13px;padding:6px 14px;background:#e0f2fe;color:#0369a1;border-radius:20px;font-weight:700;">0 chương</span>
     </div>
     <div class="parts-body">
       <div class="parts-desc">
-        ⚡ Nội dung tóm tắt chi tiết theo <strong>từng chương trọng tâm</strong> bám sát PPCT & SGK Kết nối tri thức. Mỗi chương là 1 file Word (.docx) chuyên sâu kèm sơ đồ, ví dụ có lời giải và câu hỏi tự kiểm tra, học sinh có thể tự học độc lập.
+        📖 Tài liệu được biên soạn trọn vẹn theo <strong>từng chương hoàn chỉnh</strong> (chứa đầy đủ tất cả các bài học trong chương) bám sát PPCT & SGK Kết nối tri thức. Mỗi chương được xuất ra 1 file Word (.docx) chuyên sâu kèm ý nghĩa thực tiễn, phương trình phản ứng, cấu trúc phân tử, ví dụ mẫu từng bước và câu hỏi tự luyện có đáp án.
       </div>
       <div class="parts-grid" id="partsGrid"></div>
 
@@ -837,7 +837,7 @@
       if (infoPanel) infoPanel.classList.add('visible');
 
       // Update total parts text
-      if (totalPartsEl) totalPartsEl.textContent = `${data.totalParts || (data.parts ? data.parts.length : 0)} phần`;
+      if (totalPartsEl) totalPartsEl.textContent = `${data.totalParts || (data.parts ? data.parts.length : 0)} chương`;
 
       // Render parts grid
       const grid = document.getElementById('partsGrid');
@@ -851,7 +851,8 @@
         card.innerHTML = `
           <div class="part-info">
             <div class="part-label">${part.label}</div>
-            <div class="part-sub">Tài liệu chi tiết • DOCX chuẩn A4 in ấn • Lớp ${selectedGrade} – ${selectedSem === 1 ? 'HK1' : 'HK2'}</div>
+            <div class="part-sub" style="margin-top:4px;color:#475569;line-height:1.5">${part.desc || `Tài liệu đầy đủ các bài trong chương • Lớp ${selectedGrade} – ${selectedSem === 1 ? 'HK1' : 'HK2'}`}</div>
+            <div style="margin-top:6px;font-size:12px;color:#0284c7;font-weight:600;">📄 File Word (.docx) • Chuẩn A4 in ấn • Đầy đủ lý thuyết & bài tập</div>
           </div>
           <button class="download-btn" onclick="downloadPart(${index})" id="btn-${index}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">

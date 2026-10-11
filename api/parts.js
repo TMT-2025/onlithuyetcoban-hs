@@ -25,7 +25,8 @@ module.exports = async function handler(req, res) {
   const content = chemistryContent[gradeNum][semKey];
   const parts = content.parts.map(p => ({
     id: p.id,
-    label: p.label
+    label: p.label,
+    desc: p.desc || ''
   }));
 
   res.statusCode = 200;

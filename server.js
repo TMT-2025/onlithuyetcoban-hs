@@ -26,7 +26,8 @@ app.get('/api/parts', (req, res) => {
   const content = chemistryContent[gradeNum][semKey];
   const parts = content.parts.map(p => ({
     id: p.id,
-    label: p.label
+    label: p.label,
+    desc: p.desc || ''
   }));
 
   res.json({
@@ -63,7 +64,9 @@ app.get('/api/download', async (req, res) => {
     const buffer = await Packer.toBuffer(doc);
     const filename = isAll 
       ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
-      : `LyThuyetHoa${grade}_HK${semester}_Phan${partIndex + 1}.docx`;
+      : (content.parts[partIndex] && content.parts[partIndex].label 
+          ? content.parts[partIndex].label.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, '_') + '.docx'
+          : `LyThuyetHoa${grade}_HK${semester}_Chuong${partIndex + 1}.docx`);
 
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
     res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition, Content-Length');
