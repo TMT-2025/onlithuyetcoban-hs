@@ -59,6 +59,24 @@ children.push(Sub("Phương trình phản ứng minh hoạ"));
 children.push(Eq("**Xà phòng hoá chất béo:**  (RCOO)₃C₃H₅  +  3NaOH  →(t°)  3RCOONa  +  C₃H₅(OH)₃"));
 children.push(Eq("**Thuỷ phân trong acid:**  (RCOO)₃C₃H₅  +  3H₂O  ⇌(H⁺, t°)  3RCOOH  +  C₃H₅(OH)₃"));
 children.push(Eq("**Hydro hoá chất béo lỏng (triolein → tristearin):**  (C₁₇H₃₃COO)₃C₃H₅  +  3H₂  →(Ni, t°)  (C₁₇H₃₅COO)₃C₃H₅"));
+children.push(Example("Ví dụ mẫu 1 (Bài toán tính hiệu suất phản ứng ester hoá)", [
+  "Đề bài: Đun sôi hỗn hợp gồm 6,0 gam CH3COOH và 6,9 gam C2H5OH có mặt H2SO4 đặc làm xúc tác. Khi phản ứng đạt trạng thái cân bằng, thu được 5,28 gam ester ethyl acetate (CH3COOC2H5). Tính hiệu suất của phản ứng ester hoá.",
+  "Lời giải từng bước:",
+  "1. Tính số mol ban đầu: n(CH3COOH) = 6,0 / 60 = 0,10 mol; n(C2H5OH) = 6,9 / 46 = 0,15 mol.",
+  "2. Tỉ lệ phản ứng 1:1, acid có số mol ít hơn (0,10 < 0,15) nên tính lượng lý thuyết theo CH3COOH.",
+  "3. Theo lý thuyết (hiệu suất 100%): n(ester lý thuyết) = 0,10 mol => m(ester lý thuyết) = 0,10 × 88 = 8,8 gam.",
+  "4. Hiệu suất phản ứng: H = (m thực tế / m lý thuyết) × 100% = (5,28 / 8,8) × 100% = **60,0%**."
+]));
+children.push(Example("Ví dụ mẫu 2 (Bài toán thực tiễn: Tính khối lượng xà phòng sản xuất từ chất béo)", [
+  "Đề bài: Một cơ sở tiểu thủ công nghiệp tiến hành xà phòng hoá hoàn toàn 8,9 kg chất béo tristearin (C17H35COO)3C3H5 (M = 890 g/mol) bằng dung dịch NaOH vừa đủ. Sau khi phản ứng kết thúc, thêm dung dịch NaCl bão hòa để tách xà phòng ra khỏi hỗn hợp. Biết muối sodium stearate (C17H35COONa, M = 306 g/mol) chiếm 70% khối lượng của bánh xà phòng thương phẩm. Tính khối lượng bánh xà phòng thu được.",
+  "Lời giải từng bước:",
+  "1. Phương trình phản ứng:  (C17H35COO)3C3H5  +  3NaOH  →  3C17H35COONa  +  C3H5(OH)3",
+  "2. Số mol tristearin: n = 8,9 kg / 890 kg/kmol = 0,01 kmol = 10 mol.",
+  "3. Theo phương trình: n(C17H35COONa) = 3 × n(tristearin) = 3 × 10 = 30 mol.",
+  "4. Khối lượng muối xà phòng tinh khiết: m(muối) = 30 mol × 306 g/mol = 9180 gam = 9,18 kg.",
+  "5. Khối lượng bánh xà phòng thương phẩm (chứa 70% muối): m(bánh xà phòng) = 9,18 / 0,70 = **13,11 kg**.",
+  "Ý nghĩa thực tiễn: Đây là quy trình tính toán định mức nguyên liệu cơ bản trong công nghiệp sản xuất xà phòng và chất giặt rửa."
+]));
 children.push(CheckQuestions("Tự kiểm tra nhanh", [
   { q: "Vì sao dầu ăn (chất béo không no) thường ở thể lỏng còn mỡ động vật (chất béo no) thường ở thể rắn?", a: "Vì gốc acid béo không no có liên kết đôi C=C làm mạch carbon bị 'gãy khúc', các phân tử khó xếp khít nhau, làm giảm lực tương tác van der Waals giữa các phân tử → nhiệt độ nóng chảy thấp hơn, tồn tại ở thể lỏng." },
 ]));
@@ -384,9 +402,19 @@ children.push(...Bullet([
 children.push(Eq("**Phản ứng tổng quát trong pin Zn – Cu:**  Zn  +  Cu²⁺  →  Zn²⁺  +  Cu"));
 children.push(Sub("Giải thích"));
 children.push(P("Electron luôn di chuyển tự phát từ nơi có thế điện cực **thấp hơn** (dễ nhường electron hơn — tính khử mạnh hơn) sang nơi có thế điện cực **cao hơn** (dễ nhận electron hơn — tính oxi hoá mạnh hơn) qua dây dẫn bên ngoài. Vì vậy kim loại có thế điện cực nhỏ hơn (như Zn) luôn đóng vai trò cực âm (bị oxi hoá), còn kim loại/ion có thế điện cực lớn hơn (như Cu²⁺) đóng vai trò cực dương (bị khử)."));
-children.push(Example("Ví dụ minh hoạ", [
+children.push(Example("Ví dụ mẫu 1 (Xác định cực và tính sức điện động chuẩn của pin Galvani)", [
   "Biết E°(Zn²⁺/Zn) = −0,76 V và E°(Cu²⁺/Cu) = +0,34 V. Xác định cực âm, cực dương và tính sức điện động chuẩn của pin Zn–Cu.",
-  "Lời giải: Vì E°(Zn²⁺/Zn) < E°(Cu²⁺/Cu) nên Zn là cực âm (bị oxi hoá), Cu là cực dương (bị khử). Epin = E°(Cu²⁺/Cu) − E°(Zn²⁺/Zn) = 0,34 − (−0,76) = **1,10 V**.",
+  "Lời giải: Vì E°(Zn²⁺/Zn) < E°(Cu²⁺/Cu) nên Zn là cực âm (bị oxi hoá), Cu là cực dương (bị khử). Epin = E°(Cu²⁺/Cu) − E°(Zn²⁺/Zn) = 0,34 − (−0,76) = **1,10 V**."
+]));
+children.push(Example("Ví dụ mẫu 2 (Bài toán thực tiễn: Dự đoán chiều phản ứng giữa các kim loại và dung dịch muối)", [
+  "Đề bài: Cho các cặp oxi hoá – khử với thế điện cực chuẩn: E°(Fe²⁺/Fe) = –0,44 V; E°(Cu²⁺/Cu) = +0,34 V; E°(Ag⁺/Ag) = +0,80 V.",
+  "a) Phản ứng giữa Fe kim loại và dung dịch CuSO4 có tự phát xảy ra không? Tính suất điện động tương ứng.",
+  "b) Dung dịch Cu có thể phản ứng với dung dịch FeSO4 không? Vì sao?",
+  "Lời giải từng bước:",
+  "a) Cặp Fe²⁺/Fe có E° nhỏ hơn cặp Cu²⁺/Cu nên Fe có tính khử mạnh hơn Cu, ion Cu²⁺ có tính oxi hoá mạnh hơn Fe²⁺.",
+  "   Phản ứng tự phát: Fe + Cu²⁺ → Fe²⁺ + Cu. Suất điện động: E°(pin) = 0,34 – (–0,44) = **+0,78 V > 0** nên phản ứng tự phát xảy ra hoàn toàn.",
+  "b) Chiều ngược lại (Cu + Fe²⁺) có E° = –0,78 V < 0 nên phản ứng **không thể xảy ra** ở điều kiện chuẩn.",
+  "Quy tắc thực tiễn: Chất khử mạnh hơn luôn khử được cation của kim loại có thế điện cực lớn hơn ra khỏi dung dịch muối (Quy tắc alpha α)."
 ]));
 children.push(CheckQuestions("Tự kiểm tra nhanh", [
   { q: "Trong pin điện hoá, electron di chuyển từ điện cực nào sang điện cực nào qua dây dẫn ngoài?", a: "Electron di chuyển từ cực âm (anode, nơi xảy ra oxi hoá) sang cực dương (cathode, nơi xảy ra khử) qua dây dẫn bên ngoài." },
@@ -406,9 +434,19 @@ children.push(NoteBox("Thứ tự điện phân ở các điện cực (dung d�
   "**Ở anode (oxi hoá):** các anion gốc acid **không có oxi** (Cl⁻, Br⁻, I⁻, S²⁻...) bị oxi hoá trước; nếu là anion gốc acid **có oxi** (SO₄²⁻, NO₃⁻...) hoặc F⁻ thì **nước bị oxi hoá** trước, tạo khí O₂.",
 ]));
 children.push(Eq("**Điện phân dung dịch NaCl có màng ngăn:**  2NaCl  +  2H₂O  →(điện phân dd, màng ngăn)  2NaOH  +  H₂↑  +  Cl₂↑"));
-children.push(Example("Ví dụ minh hoạ", [
+children.push(Example("Ví dụ mẫu 1: Sơ đồ điện phân dung dịch muối", [
   "Viết sơ đồ điện phân dung dịch CuSO₄ với điện cực trơ.",
-  "Lời giải: Ở cathode, Cu²⁺ có tính oxi hoá mạnh nên bị khử trước: Cu²⁺ + 2e⁻ → Cu. Ở anode, gốc SO₄²⁻ có oxi nên nước bị oxi hoá: 2H₂O → O₂ + 4H⁺ + 4e⁻. Phương trình điện phân tổng quát: 2CuSO₄ + 2H₂O → 2Cu + O₂ + 2H₂SO₄.",
+  "Lời giải: Ở cathode, Cu²⁺ có tính oxi hoá mạnh nên bị khử trước: Cu²⁺ + 2e⁻ → Cu. Ở anode, gốc SO₄²⁻ có oxi nên nước bị oxi hoá: 2H₂O → O₂ + 4H⁺ + 4e⁻. Phương trình điện phân tổng quát: 2CuSO₄ + 2H₂O → 2Cu + O₂ + 2H₂SO₄."
+]));
+children.push(Example("Ví dụ mẫu 2 (Bài toán thực tiễn: Tính thời gian mạ kim loại theo Định luật Faraday)", [
+  "Đề bài: Một xưởng cơ khí cần mạ một lớp đồng (Cu) dày lên bề mặt một chi tiết máy bằng phương pháp điện phân dung dịch CuSO4 với cường độ dòng điện không đổi I = 5 Ampe. Biết khối lượng Cu cần mạ bám lên cathode là 3,2 gam (M = 64, hằng số Faraday F = 96500 C/mol, trao đổi 2 electron: Cu²⁺ + 2e → Cu). Tính thời gian cần thiết để tiến hành quá trình mạ điện.",
+  "Lời giải từng bước:",
+  "1. Áp dụng công thức định luật Faraday:  m = (A × I × t) / (n × F)",
+  "   Trong đó: m = 3,2 g; A = 64; n = 2; I = 5 A; F = 96500 C/mol; t là thời gian (giây).",
+  "2. Rút ra công thức tính thời gian t:",
+  "   t = (m × n × F) / (A × I) = (3,2 × 2 × 96500) / (64 × 5)",
+  "   t = 617600 / 320 = **1930 giây** = **32 phút 10 giây**.",
+  "Ý nghĩa thực tiễn: Định luật Faraday là công cụ tính toán định lượng chuẩn xác giúp các kỹ sư mạ điện, luyện kim kiểm soát độ dày màng kim loại và lượng điện năng tiêu thụ."
 ]));
 children.push(Section("IV. Ứng dụng của điện phân"));
 children.push(...Bullet([

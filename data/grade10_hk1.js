@@ -89,12 +89,31 @@ children.push(Section("III. Đồng vị"));
 children.push(P("**Đồng vị** là những nguyên tử có cùng số proton (cùng Z) nhưng khác số neutron (khác số khối A)."));
 children.push(P("Ví dụ: Hydrogen có 3 đồng vị bền là ¹H (protium), ²H (deuterium – D), ³H (tritium – T)."));
 children.push(...Img("03_dongvi_hydrogen.png", 440, "Ba đồng vị bền của nguyên tố hydrogen — cùng 1 proton nhưng khác số neutron."));
-children.push(Section("IV. Nguyên tử khối trung bình"));
+children.push(Section("IV. Nguyên tử khối trung bình và Bài toán tính toán đồng vị"));
 children.push(P("Nguyên tử khối trung bình của một nguyên tố (kí hiệu **A̅**) được tính theo phần trăm số nguyên tử của các đồng vị:"));
-children.push(P("**A̅ = (A₁.x₁ + A₂.x₂ + ... )/100**  (x: phần trăm số nguyên tử mỗi đồng vị)", { align: AlignmentType.CENTER }));
-children.push(Example("Ví dụ minh hoạ", [
-  "Nguyên tố chlorine có 2 đồng vị bền: ³⁵Cl chiếm 75,77% và ³⁷Cl chiếm 24,23% số nguyên tử. Tính nguyên tử khối trung bình của chlorine.",
-  "Lời giải: A̅ = (35 × 75,77 + 37 × 24,23)/100 ≈ **35,48**.",
+children.push(P("**A̅ = (A₁.x₁ + A₂.x₂ + ... )/100**  (với x₁, x₂ là phần trăm số nguyên tử tương ứng, x₁ + x₂ = 100%)", { align: AlignmentType.CENTER }));
+children.push(P("Từ công thức này, ta có thể giải quyết 3 dạng bài toán thường gặp:"));
+children.push(...Bullet([
+  "**Dạng 1:** Cho biết số khối các đồng vị và phần trăm số nguyên tử → Tính nguyên tử khối trung bình A̅.",
+  "**Dạng 2:** Cho biết A̅ và số khối các đồng vị → Lập phương trình giải tìm phần trăm số nguyên tử của mỗi đồng vị.",
+  "**Dạng 3 (Vận dụng thực tiễn):** Tính thành phần % khối lượng của một đồng vị cụ thể trong một khoáng chất hoặc hợp chất hoá học dùng trong đời sống."
+]));
+children.push(Example("Ví dụ mẫu 1 (Dạng tính phần trăm đồng vị từ A̅)", [
+  "Đề bài: Trong tự nhiên, copper (đồng) có 2 đồng vị bền là ⁶³Cu và ⁶⁵Cu. Nguyên tử khối trung bình của copper là 63,54. Hãy tính phần trăm số nguyên tử của mỗi đồng vị trong tự nhiên.",
+  "Lời giải từng bước:",
+  "1. Gọi phần trăm số nguyên tử của đồng vị ⁶³Cu là x (%), thì phần trăm của ⁶⁵Cu là (100 – x) (%).",
+  "2. Áp dụng công thức nguyên tử khối trung bình: A̅ = [63.x + 65.(100 – x)] / 100 = 63,54.",
+  "3. Biến đổi: 63x + 6500 – 65x = 6354  <=>  –2x = –146  <=>  x = 73 (%).",
+  "Kết luận: Đồng vị ⁶³Cu chiếm **73%** và đồng vị ⁶⁵Cu chiếm **27%** số nguyên tử copper trong tự nhiên."
+]));
+children.push(Example("Ví dụ mẫu 2 (Bài toán thực tiễn: Xác định lượng đồng vị trong phân bón / khoáng vật)", [
+  "Đề bài: Potassium (kali) là khoáng chất dinh dưỡng thiết yếu trong phân bón NPK và cơ thể người. Nguyên tố potassium có nguyên tử khối trung bình A̅ = 39,13 gồm 2 đồng vị ³⁹K và ⁴¹K. Tính phần trăm khối lượng của đồng vị ³⁹K có trong phân bón potassium chloride (KCl) tinh khiết (cho Cl = 35,5).",
+  "Lời giải từng bước:",
+  "1. Tìm % số nguyên tử: Gọi x là % của ³⁹K: [39.x + 41.(100 – x)] / 100 = 39,13  =>  –2x = –187  =>  x = 93,5% (và ⁴¹K chiếm 6,5%).",
+  "2. Phân tử khối của KCl = 39,13 + 35,5 = 74,63 g/mol.",
+  "3. Trong 1 mol phân tử KCl, khối lượng của đồng vị ³⁹K là: 39 × (93,5 / 100) = 36,465 gam.",
+  "4. Phần trăm khối lượng của ³⁹K trong KCl: %m(³⁹K) = (36,465 / 74,63) × 100% ≈ **48,86%**.",
+  "Ý nghĩa thực tiễn: Giúp các nhà nông học và phân tích địa chất xác định chính xác liều lượng vi chất dinh dưỡng đưa vào đất trồng."
 ]));
 children.push(CheckQuestions("Tự kiểm tra nhanh", [
   { q: "Hai nguyên tử có cùng số proton nhưng khác số neutron thì có phải là hai đồng vị của cùng một nguyên tố không?", a: "Đúng, vì đồng vị được định nghĩa là các nguyên tử cùng Z (cùng số proton), khác N (khác số khối A)." },
@@ -443,11 +462,33 @@ children.push(...Bullet([
   "Bước 3: Đặt hệ số của các chất oxi hoá, chất khử vào sơ đồ phản ứng.",
   "Bước 4: Đặt hệ số các chất còn lại, kiểm tra lại số nguyên tử của các nguyên tố ở hai vế.",
 ]));
-children.push(Example("Ví dụ minh hoạ: cân bằng phản ứng Fe + HCl → FeCl₂ + H₂", [
+children.push(Example("Ví dụ mẫu 1 (Cân bằng phản ứng oxi hoá – khử cơ bản)", [
+  "Cân bằng phản ứng: Fe + HCl → FeCl₂ + H₂.",
   "Bước 1: Số oxi hoá thay đổi: Fe⁰ → Fe⁺² (nhường 2e); H⁺ (trong HCl) → H₂⁰ (mỗi H nhận 1e).",
   "Quá trình oxi hoá: Fe → Fe²⁺ + 2e.  Quá trình khử: 2H⁺ + 2e → H₂.",
   "Bước 2: Số electron nhường (2) = số electron nhận (2) → hệ số Fe và H₂ đều là 1.",
-  "Bước 3–4: Đặt hệ số và cân bằng các nguyên tố còn lại, thu được: **Fe + 2HCl → FeCl₂ + H₂**.",
+  "Bước 3–4: Đặt hệ số và cân bằng: **Fe + 2HCl → FeCl₂ + H₂**."
+]));
+children.push(Example("Ví dụ mẫu 2 (Cân bằng phản ứng có môi trường tạo muối và khí NOx)", [
+  "Cân bằng phản ứng: Cu + HNO₃(loãng) → Cu(NO₃)₂ + NO↑ + H₂O.",
+  "Bước 1: Xác định nguyên tố thay đổi số oxi hoá: Cu⁰ → Cu⁺² (chất khử); N⁺⁵ (trong HNO₃) → N⁺² (trong NO, chất oxi hoá).",
+  "Bước 2: Viết các quá trình nhường và nhận electron:",
+  "  Quá trình oxi hoá:  Cu⁰  →  Cu⁺²  +  2e         (nhân 3)",
+  "  Quá trình khử:      N⁺⁵  +  3e  →  N⁺² (trong NO)   (nhân 2)",
+  "Bước 3: Đặt hệ số: 3Cu + HNO₃ → 3Cu(NO₃)₂ + 2NO + H₂O.",
+  "Bước 4: Đếm tổng nguyên tử N ở vế phải = 3×2 (trong muối) + 2 (trong NO) = 8 nguyên tử N. Do đó cần 8 phân tử HNO₃.",
+  "Cân bằng H: 8 phân tử HNO₃ → 4H₂O. Kiểm tra lại oxygen: vế trái có 8×3 = 24; vế phải có 3×6 + 2 + 4 = 24 (chính xác!).",
+  "Phương trình hoàn chỉnh: **3Cu + 8HNO₃ → 3Cu(NO₃)₂ + 2NO↑ + 4H₂O**."
+]));
+children.push(Example("Ví dụ mẫu 3 (Bài toán tính toán thực tiễn: Xác định hàm lượng sắt trong quặng)", [
+  "Đề bài: Để xác định hàm lượng Fe trong một mẫu quặng sắt, người ta hòa tan hoàn toàn mẫu quặng vào dung dịch H2SO4 loãng thu được dung dịch FeSO4. Chuẩn độ dung dịch này bằng dung dịch thuốc tím KMnO4 0,02 M theo phản ứng:",
+  "  10FeSO4 + 2KMnO4 + 8H2SO4 → 5Fe2(SO4)3 + K2SO4 + 2MnSO4 + 8H2O.",
+  "Thấy vừa hết 25 mL dung dịch KMnO4. Tính khối lượng ion Fe²⁺ có trong mẫu quặng.",
+  "Lời giải từng bước:",
+  "1. Số mol KMnO4 tiêu tốn: n(KMnO4) = CM × V = 0,02 × 0,025 = 0,0005 mol.",
+  "2. Theo phương trình: n(FeSO4) = 5 × n(KMnO4) = 5 × 0,0005 = 0,0025 mol.",
+  "3. Khối lượng Fe trong mẫu: m(Fe) = n × M = 0,0025 × 56 = **0,14 gam**.",
+  "Ý nghĩa thực tiễn: Phương pháp chuẩn độ pemanganat là quy trình kiểm tra chất lượng quặng sắt và thép trong ngành công nghiệp luyện kim hiện đại."
 ]));
 children.push(Section("IV. Ý nghĩa của phản ứng oxi hoá – khử"));
 children.push(P("Phản ứng oxi hoá – khử gắn liền với nhiều quá trình quan trọng trong đời sống và sản xuất: **sự cháy** của nhiên liệu (than, xăng dầu, khí gas), **sự ăn mòn kim loại**, **luyện kim** (điều chế kim loại), **quang hợp và hô hấp** ở sinh vật, các quá trình điện phân, pin điện hoá..."));

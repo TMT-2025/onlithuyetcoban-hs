@@ -32,9 +32,20 @@ children.push(NoteBox("Ghi nhớ", [
   "Hằng số cân bằng Kc chỉ phụ thuộc vào **nhiệt độ** và **bản chất phản ứng**, không phụ thuộc vào nồng độ ban đầu các chất.",
   "Kc càng lớn thì cân bằng càng chuyển dịch về phía tạo sản phẩm (chiều thuận chiếm ưu thế).",
 ]));
-children.push(Example("Ví dụ minh hoạ", [
+children.push(Example("Ví dụ mẫu 1: Thiết lập biểu thức Kc", [
   "Cho phản ứng: N₂ (k) + 3H₂ (k) ⇌ 2NH₃ (k). Viết biểu thức hằng số cân bằng Kc của phản ứng.",
-  "Lời giải: Kc = [NH₃]² / ([N₂][H₂]³).",
+  "Lời giải: Kc = [NH₃]² / ([N₂][H₂]³)."
+]));
+children.push(Example("Ví dụ mẫu 2 (Bài toán tính toán: Xác định Kc và nồng độ cân bằng)", [
+  "Đề bài: Cho phản ứng: H₂ (g) + I₂ (g) ⇌ 2HI (g) thực hiện trong bình kín dung tích 1 lít ở nhiệt độ 430 °C. Ban đầu nạp vào bình 1,0 mol H₂ và 1,0 mol I₂. Khi hệ đạt trạng thái cân bằng, có 1,56 mol HI được tạo thành. Tính hằng số cân bằng Kc của phản ứng ở 430 °C.",
+  "Lời giải từng bước (Áp dụng phương pháp 3 dòng Ban đầu - Phản ứng - Cân bằng):",
+  "  Phương trình:             H₂ (g)   +   I₂ (g)   ⇌   2HI (g)",
+  "  Ban đầu (M):              1,0          1,0           0",
+  "  Phản ứng (M):             0,78         0,78          1,56  (vì tạo ra 1,56 M HI nên H2 và I2 phản ứng: 1,56 / 2 = 0,78 M)",
+  "  Cân bằng (M):             0,22         0,22          1,56",
+  "Áp dụng biểu thức hằng số cân bằng:",
+  "  Kc = [HI]² / ([H₂] × [I₂]) = (1,56)² / (0,22 × 0,22) = 2,4336 / 0,0484 ≈ **50,28**.",
+  "Ý nghĩa thực tiễn: Kc >> 1 chứng tỏ ở 430 °C phản ứng chuyển dịch rất mạnh theo chiều thuận, hiệu suất chuyển hóa đạt tới 78%."
 ]));
 
         return children;
@@ -60,17 +71,37 @@ children.push(DataTable(
 children.push(spacer());
 children.push(Eq("**Điện li chất điện li mạnh:**  HCl  →  H⁺  +  Cl⁻"));
 children.push(Eq("**Điện li chất điện li yếu (cân bằng):**  CH₃COOH  ⇌  CH₃COO⁻  +  H⁺"));
-children.push(Section("II. pH của dung dịch"));
-children.push(P("**pH = −log[H⁺]**, dùng để đánh giá độ acid/base của dung dịch (ở 25 °C):"));
+children.push(Section("II. pH của dung dịch và Chuẩn độ Acid – Base"));
+children.push(P("**pH = −log[H⁺]**, hoặc **[H⁺] = 10^(–pH)**. Trong dung dịch nước ở 25 °C, tích số ion của nước là hằng số: **Kw = [H⁺] × [OH⁻] = 1,0 × 10⁻¹⁴**, do đó **pH + pOH = 14**."));
 children.push(DataTable(
-  ["Khoảng pH", "Môi trường", "Chất chỉ thị (quỳ tím)"],
+  ["Khoảng pH", "Môi trường", "Chất chỉ thị (quỳ tím)", "Chất chỉ thị (phenolphthalein)"],
   [
-    ["pH < 7", "Acid", "Hoá đỏ"],
-    ["pH = 7", "Trung tính", "Không đổi màu"],
-    ["pH > 7", "Base (kiềm)", "Hoá xanh"],
+    ["pH < 7", "Acid ([H+] > 10^-7 M)", "Hoá đỏ", "Không màu"],
+    ["pH = 7", "Trung tính ([H+] = 10^-7 M)", "Không đổi màu (tím)", "Không màu"],
+    ["pH > 7", "Base/Kiềm ([H+] < 10^-7 M)", "Hoá xanh", "Hoá hồng tím"],
   ],
 ));
 children.push(spacer());
+children.push(Example("Ví dụ mẫu 1 (Tính pH của dung dịch acid và base mạnh)", [
+  "Đề bài:",
+  "a) Tính pH của dung dịch HCl 0,001 M.",
+  "b) Tính pH của dung dịch Ba(OH)₂ 0,005 M.",
+  "Lời giải từng bước:",
+  "a) HCl là acid mạnh phân li hoàn toàn: HCl → H⁺ + Cl⁻ => [H⁺] = 0,001 M = 10⁻³ M. pH = –log(10⁻³) = **3,0** (môi trường acid).",
+  "b) Ba(OH)₂ là base mạnh: Ba(OH)₂ → Ba²⁺ + 2OH⁻ => [OH⁻] = 2 × 0,005 = 0,01 M = 10⁻² M.",
+  "   pOH = –log(10⁻²) = 2 => pH = 14 – pOH = 14 – 2 = **12,0** (môi trường base mạnh)."
+]));
+children.push(Example("Ví dụ mẫu 2 (Bài toán thực tiễn: Chuẩn độ xác định nồng độ giấm ăn thương mại)", [
+  "Đề bài: Giấm ăn là dung dịch acetic acid (CH3COOH). Để xác định nồng độ mol của một mẫu giấm ăn, học sinh lấy 10,0 mL mẫu giấm, thêm vài giọt phenolphthalein rồi chuẩn độ bằng dung dịch chuẩn NaOH 0,10 M. Khi dung dịch xuất hiện màu hồng nhạt bền trong 30 giây thì dừng chuẩn độ, thể tích dung dịch NaOH tiêu tốn là 12,5 mL. Tính nồng độ mol của CH3COOH trong mẫu giấm ăn.",
+  "Lời giải từng bước:",
+  "1. Phương trình phản ứng chuẩn độ: CH3COOH + NaOH → CH3COONa + H2O.",
+  "2. Tại điểm tương đương, số mol acid bằng số mol base: n(CH3COOH) = n(NaOH).",
+  "   <=> C(acid) × V(acid) = C(base) × V(base)",
+  "   <=> C(acid) × 10,0 = 0,10 × 12,5",
+  "   <=> C(acid) = (0,10 × 12,5) / 10,0 = **0,125 M**.",
+  "3. Nồng độ khối lượng: m = 0,125 × 60 = 7,5 g/L = 0,75% (độ chua nhẹ thích hợp pha chế nước chấm và bảo quản thực phẩm).",
+  "Ý nghĩa thực tiễn: Đây là phương pháp kiểm nghiệm chất lượng chuẩn trong an toàn vệ sinh thực phẩm."
+]));
 children.push(Section("III. Sự chuyển dịch cân bằng — Nguyên lí Le Chatelier"));
 children.push(NoteBox("Nguyên lí Le Chatelier", [
   "Khi một hệ đang ở trạng thái cân bằng chịu tác động từ bên ngoài (thay đổi **nồng độ, nhiệt độ, áp suất**), cân bằng sẽ **chuyển dịch theo chiều làm giảm bớt tác động đó**.",
@@ -297,9 +328,26 @@ children.push(...Bullet([
   "**Công thức đơn giản nhất (CTĐGN):** biểu thị tỉ lệ tối giản về số nguyên tử của các nguyên tố trong phân tử.",
   "**Công thức phân tử (CTPT):** biểu thị đúng số lượng nguyên tử của mỗi nguyên tố trong phân tử. CTPT = (CTĐGN)ₙ, với n xác định dựa vào phân tử khối (thường xác định qua phổ khối lượng MS).",
 ]));
-children.push(Example("Ví dụ minh hoạ", [
+children.push(Example("Ví dụ mẫu 1 (Xác định CTPT từ CTĐGN và phân tử khối)", [
   "Một hợp chất hữu cơ có công thức đơn giản nhất là CH2O và phân tử khối bằng 60. Xác định công thức phân tử.",
-  "Lời giải: Khối lượng CTĐGN = 12+2+16 = 30. Ta có n = 60/30 = 2. Vậy công thức phân tử là (CH2O)2 = **C2H4O2**.",
+  "Lời giải: Khối lượng CTĐGN = 12+2+16 = 30. Ta có n = 60/30 = 2. Vậy công thức phân tử là (CH2O)2 = **C2H4O2**."
+]));
+children.push(Example("Ví dụ mẫu 2 (Bài toán thực tiễn: Thiết lập CTPT hương liệu vanillin từ phổ MS và % nguyên tố)", [
+  "Đề bài: Vanillin là chất tạo mùi thơm hương vani tự nhiên dùng phổ biến trong thực phẩm, bánh kẹo. Kết quả phân tích nguyên tố cho thấy vanillin chứa 63,16% C; 5,26% H về khối lượng, còn lại là oxygen. Trên phổ khối lượng (MS) của vanillin, peak của ion phân tử [M+] có giá trị m/z = 152.",
+  "a) Tìm công thức đơn giản nhất của vanillin.",
+  "b) Xác định công thức phân tử của vanillin.",
+  "Lời giải từng bước:",
+  "1. Phần trăm khối lượng của oxygen: %O = 100% – 63,16% – 5,26% = 31,58%.",
+  "2. Thiết lập tỉ lệ số nguyên tử C : H : O:",
+  "   nC : nH : nO = (%C / 12) : (%H / 1) : (%O / 16)",
+  "   nC : nH : nO = (63,16 / 12) : (5,26 / 1) : (31,58 / 16) = 5,263 : 5,260 : 1,974",
+  "   Chia cho số nhỏ nhất (1,974):",
+  "   nC : nH : nO ≈ 2,666 : 2,665 : 1 = (8/3) : (8/3) : 1 = **8 : 8 : 3**.",
+  "   => Công thức đơn giản nhất của vanillin là **C8H8O3**.",
+  "3. Phân tử khối xác định từ phổ MS: M = 152 g/mol.",
+  "   Ta có: M(C8H8O3)n = (12×8 + 1×8 + 16×3) × n = 152 × n = 152  =>  n = 1.",
+  "   => Công thức phân tử của vanillin là **C8H8O3**.",
+  "Ý nghĩa thực tiễn: Đây là phương pháp cốt lõi trong hoá học các hợp chất thiên nhiên để xác định hoạt chất sinh học từ cây cỏ."
 ]));
 
 children.push(Bai("Bài 13. Cấu tạo hoá học hợp chất hữu cơ"));
