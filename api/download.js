@@ -12,7 +12,7 @@ module.exports = async function handler(req, res) {
 
   const url = new URL(req.url, 'http://' + (req.headers.host || 'localhost'));
   const grade = url.searchParams.get('grade') || (req.query && req.query.grade);
-  const semester = url.searchParams.get('semester') || (req.query && req.query.semester);
+  const semester = url.searchParams.get('semester') || url.searchParams.get('term') || (req.query && (req.query.semester || req.query.term));
   const part = url.searchParams.get('part') || (req.query && req.query.part);
 
   const gradeNum = parseInt(grade);
