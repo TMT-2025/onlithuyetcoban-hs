@@ -17,7 +17,8 @@ module.exports = async function handler(req, res) {
 
   const gradeNum = parseInt(grade);
   const semKey = semester === '1' ? 'hk1' : 'hk2';
-  const partIndex = parseInt(part) || 0;
+  const isAll = part === 'all' || part === '-1';
+  const partIndex = isAll ? 'all' : (parseInt(part) || 0);
 
   if (!chemistryContent[gradeNum] || !chemistryContent[gradeNum][semKey]) {
     res.statusCode = 404;
@@ -26,7 +27,7 @@ module.exports = async function handler(req, res) {
   }
 
   const content = chemistryContent[gradeNum][semKey];
-  if (partIndex >= content.parts.length) {
+  if (!isAll && partIndex >= content.parts.length) {
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     return res.end(JSON.stringify({ error: 'Phần không tồn tại' }));
@@ -41,13 +42,19 @@ module.exports = async function handler(req, res) {
     }
 
     const buffer = await Packer.toBuffer(doc);
-    const filename = 'LyThuyetHoa' + grade + '_HK' + semester + '_Phan' + (partIndex + 1) + '.docx';
+    const filename = isAll 
+      ? 'LyThuyetHoa' + grade + '_HK' + semester + '_TronBoTatCaCacChuong.docx'
+      : 'LyThuyetHoa' + grade + '_HK' + semester + '_Phan' + (partIndex + 1) + '.docx';
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     res.setHeader('Content-Disposition', 'attachment; filename="' + filename + '"; filename*=UTF-8\'\'' + encodeURIComponent(filename));
     res.setHeader('Content-Length', buffer.length);
     res.setHeader('Cache-Control', 'no-cache');
+
+    if (typeof res.send === 'function') {
+      return res.send(buffer);
+    }
     return res.end(buffer);
   } catch (err) {
     console.error('Lỗi khi tạo docx:', err);

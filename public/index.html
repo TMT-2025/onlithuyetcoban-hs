@@ -630,18 +630,26 @@
     </div>
     <div class="parts-body">
       <div class="parts-desc">
-        ⚡ Nội dung được chia thành <strong id="totalPartsText">7 phần</strong> để tiện tải và in ấn. Mỗi phần là 1 file DOCX hoàn chỉnh có thể in ngay.
+        ⚡ Nội dung tóm tắt chi tiết theo <strong>từng chương trọng tâm</strong> bám sát PPCT & SGK Kết nối tri thức. Mỗi chương là 1 file Word (.docx) chuyên sâu kèm sơ đồ, ví dụ có lời giải và câu hỏi tự kiểm tra, học sinh có thể tự học độc lập.
       </div>
       <div class="parts-grid" id="partsGrid"></div>
 
-      <div class="download-all-wrap">
+      <div class="download-all-wrap" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <button class="download-all-btn download-full-btn" onclick="downloadFullSemester()" id="downloadFullBtn" style="background: linear-gradient(135deg, #166534 0%, #15803d 100%);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          📦 Tải trọn bộ học kỳ (Gộp 1 file DOCX)
+        </button>
         <button class="download-all-btn" onclick="downloadAll()" id="downloadAllBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
-          Tải tất cả phần (tuần tự)
+          ⚡ Tải tất cả các chương (Tuần tự)
         </button>
       </div>
 
@@ -836,7 +844,7 @@
         card.innerHTML = `
           <div class="part-info">
             <div class="part-label">${part.label}</div>
-            <div class="part-sub">File DOCX • Lớp ${selectedGrade} • ${selectedSem === 1 ? 'HK1' : 'HK2'}</div>
+            <div class="part-sub">Tài liệu chi tiết • DOCX chuẩn A4 in ấn • Lớp ${selectedGrade} – ${selectedSem === 1 ? 'HK1' : 'HK2'}</div>
           </div>
           <button class="download-btn" onclick="downloadPart(${index})" id="btn-${index}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -844,7 +852,7 @@
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            Tải phần ${index + 1}
+            Tải chương này (DOCX)
           </button>
         `;
         grid.appendChild(card);
@@ -860,6 +868,64 @@
     }
   }
 
+  async function downloadFullSemester() {
+    if (!selectedGrade || !selectedSem) {
+      showNotification('Vui lòng chọn khối lớp và học kỳ trước', 'info');
+      return;
+    }
+
+    const btn = document.getElementById('downloadFullBtn');
+    const originalHtml = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;width:16px;height:16px">
+      <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+      <path d="M12 2a10 10 0 010 20" stroke-opacity="1"/>
+    </svg> Đang tạo trọn bộ...`;
+
+    const downloadUrl = `/api/download?grade=${selectedGrade}&semester=${selectedSem}&part=all`;
+
+    try {
+      const response = await fetch(downloadUrl);
+      if (!response.ok) {
+        let errorMsg = 'Tải file thất bại (mã ' + response.status + ')';
+        try { const err = await response.json(); errorMsg = err.error || errorMsg; } catch (e) {}
+        throw new Error(errorMsg);
+      }
+
+      const blob = await response.blob();
+      const arrayBuffer = await blob.arrayBuffer();
+      const uint8 = new Uint8Array(arrayBuffer);
+
+      if (uint8.length < 500 || uint8[0] !== 0x50 || uint8[1] !== 0x4B) {
+        throw new Error('File tải về không đúng định dạng Word');
+      }
+
+      const filename = `LyThuyetHoa${selectedGrade}_HK${selectedSem}_TronBoTatCaCacChuong.docx`;
+      const verifiedBlob = new Blob([uint8], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const blobUrl = URL.createObjectURL(verifiedBlob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+
+      btn.disabled = false;
+      btn.innerHTML = `✅ Đã tải trọn bộ!`;
+      showNotification(`🎉 Đã tải trọn bộ Hóa học ${selectedGrade} - HK${selectedSem} thành công!`, 'success');
+      setTimeout(() => { btn.innerHTML = originalHtml; }, 3500);
+    } catch (err) {
+      console.error('Download all error:', err);
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+      showNotification('Lỗi khi tải trọn bộ: ' + err.message, 'error');
+      // Direct navigation fallback
+      window.location.href = downloadUrl;
+    }
+  }
+
   async function downloadPart(index) {
     const btn = document.getElementById(`btn-${index}`);
     if (!btn) return;
@@ -869,9 +935,8 @@
     btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;width:14px;height:14px">
       <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
       <path d="M12 2a10 10 0 010 20" stroke-opacity="1"/>
-    </svg> Đang tạo...`;
+    </svg> Đang tạo DOCX...`;
 
-    // Add spin animation
     if (!document.getElementById('spin-style')) {
       const style = document.createElement('style');
       style.id = 'spin-style';
@@ -885,7 +950,7 @@
       const response = await fetch(downloadUrl);
 
       if (!response.ok) {
-        let errorMsg = 'Tải file thất bại';
+        let errorMsg = 'Tải file thất bại (mã ' + response.status + ')';
         try {
           const err = await response.json();
           errorMsg = err.error || errorMsg;
@@ -900,14 +965,17 @@
       }
 
       const blob = await response.blob();
-      if (blob.size < 400) {
-        const text = await blob.text();
+      const arrayBuffer = await blob.arrayBuffer();
+      const uint8 = new Uint8Array(arrayBuffer);
+
+      if (uint8.length < 500 || uint8[0] !== 0x50 || uint8[1] !== 0x4B) {
+        let errText = 'Dữ liệu file tải về không hợp lệ';
         try {
+          const text = new TextDecoder().decode(uint8.slice(0, 400));
           const json = JSON.parse(text);
-          throw new Error(json.error || 'Dung lượng file không hợp lệ');
-        } catch (e) {
-          if (e.message !== 'Dung lượng file không hợp lệ') throw e;
-        }
+          errText = json.error || errText;
+        } catch(e) {}
+        throw new Error(errText);
       }
 
       // Extract filename
@@ -923,7 +991,8 @@
         }
       }
 
-      const blobUrl = URL.createObjectURL(blob);
+      const verifiedBlob = new Blob([uint8], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const blobUrl = URL.createObjectURL(verifiedBlob);
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = blobUrl;
@@ -932,53 +1001,41 @@
       a.click();
       document.body.removeChild(a);
 
-      // Keep blobUrl alive for 60s so browser finishes download
       setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
 
       btn.classList.remove('loading');
       btn.classList.add('success');
       btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px">
         <polyline points="20 6 9 17 4 12"/>
-      </svg> Đã tải`;
+      </svg> Đã tải xong`;
 
-      showNotification(`✅ Đã tải phần ${index + 1} thành công!`, 'success');
+      showNotification(`✅ Đã tải file "${filename}" thành công!`, 'success');
 
       setTimeout(() => {
         btn.classList.remove('success');
         btn.innerHTML = originalHtml;
-      }, 3000);
+      }, 3500);
 
     } catch (err) {
-      console.warn('Blob fetch download failed, falling back to direct navigation:', err);
-      try {
-        // Fallback: direct iframe download
-        const hiddenIframe = document.createElement('iframe');
-        hiddenIframe.style.display = 'none';
-        hiddenIframe.src = downloadUrl;
-        document.body.appendChild(hiddenIframe);
-        setTimeout(() => document.body.removeChild(hiddenIframe), 30000);
+      console.error('Download error:', err);
+      btn.classList.remove('loading');
+      btn.classList.add('error');
+      btn.innerHTML = `⚠️ Thử lại`;
+      showNotification('Lỗi tải file: ' + err.message, 'error');
 
-        btn.classList.remove('loading');
-        btn.classList.add('success');
-        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg> Đang tải về`;
-        showNotification(`📥 Đang tải về phần ${index + 1}...`, 'success');
+      // Tự động thử mở link tải trực tiếp
+      const fallbackA = document.createElement('a');
+      fallbackA.href = downloadUrl;
+      fallbackA.setAttribute('download', '');
+      fallbackA.target = '_blank';
+      document.body.appendChild(fallbackA);
+      fallbackA.click();
+      document.body.removeChild(fallbackA);
 
-        setTimeout(() => {
-          btn.classList.remove('success');
-          btn.innerHTML = originalHtml;
-        }, 3000);
-      } catch (fallbackErr) {
-        btn.classList.remove('loading');
-        btn.classList.add('error');
-        btn.innerHTML = `⚠️ Lỗi`;
-        showNotification('Lỗi tải file: ' + err.message, 'error');
-        setTimeout(() => {
-          btn.classList.remove('error');
-          btn.innerHTML = originalHtml;
-        }, 3000);
-      }
+      setTimeout(() => {
+        btn.classList.remove('error');
+        btn.innerHTML = originalHtml;
+      }, 4000);
     }
   }
 

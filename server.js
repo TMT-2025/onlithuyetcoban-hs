@@ -37,19 +37,20 @@ app.get('/api/parts', (req, res) => {
   });
 });
 
-// API: generate and download DOCX for a specific part
+// API: generate and download DOCX for a specific part or all parts
 app.get('/api/download', async (req, res) => {
   const { grade, semester, part } = req.query;
   const gradeNum = parseInt(grade);
   const semKey = semester === '1' ? 'hk1' : 'hk2';
-  const partIndex = parseInt(part) || 0;
+  const isAll = part === 'all' || part === '-1';
+  const partIndex = isAll ? 'all' : (parseInt(part) || 0);
 
   if (!chemistryContent[gradeNum] || !chemistryContent[gradeNum][semKey]) {
     return res.status(404).json({ error: 'Không tìm thấy nội dung' });
   }
 
   const content = chemistryContent[gradeNum][semKey];
-  if (partIndex >= content.parts.length) {
+  if (!isAll && partIndex >= content.parts.length) {
     return res.status(404).json({ error: 'Phần không tồn tại' });
   }
 
@@ -60,7 +61,9 @@ app.get('/api/download', async (req, res) => {
     }
 
     const buffer = await Packer.toBuffer(doc);
-    const filename = `LyThuyetHoa${grade}_HK${semester}_Phan${partIndex + 1}.docx`;
+    const filename = isAll 
+      ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
+      : `LyThuyetHoa${grade}_HK${semester}_Phan${partIndex + 1}.docx`;
 
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
     res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition, Content-Length');
@@ -93,7 +96,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
     console.log(`🧪 Ứng dụng Tài liệu Hóa học đang chạy tại: http://localhost:${PORT}`);
     console.log(`📚 Hỗ trợ: Hóa 10, 11, 12 – HK1 và HK2`);
-    console.log(`📄 Mỗi học kỳ chia thành tối đa 7 phần tải xuống`);
+    console.log(`📄 Mỗi học kỳ chia theo từng chương chi tiết (tối đa 7 phần tải xuống)`);
   });
 }
 

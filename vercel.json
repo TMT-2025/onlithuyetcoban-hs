@@ -1,8 +1,13 @@
 {
   "version": 2,
+  "rewrites": [
+    { "source": "/api/download", "destination": "/api/download.js" },
+    { "source": "/api/parts", "destination": "/api/parts.js" },
+    { "source": "/api/info", "destination": "/api/index.js" }
+  ],
   "functions": {
     "api/*.js": {
-      "includeFiles": "assets/**"
+      "includeFiles": "{assets/**,data/**,lib/**,chemistry-content.js}"
     }
   }
 }
