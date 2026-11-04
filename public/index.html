@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tài liệu Ôn tập Hóa học – KNTT</title>
+  <title>Tài liệu Ôn tập Hóa học & Chuyên đề – KNTT</title>
   <style>
     :root {
       --primary: #1a4a8a;
@@ -61,7 +61,7 @@
 
     .header-content { position: relative; z-index: 1; }
 
-    .header .icon { font-size: 56px; margin-bottom: 12px; display: block; }
+    .header .icon { font-size: 52px; margin-bottom: 10px; display: block; }
 
     .header h1 {
       font-size: clamp(20px, 4vw, 30px);
@@ -72,7 +72,7 @@
 
     .header p {
       font-size: 14px;
-      opacity: 0.85;
+      opacity: 0.88;
       font-style: italic;
     }
 
@@ -80,7 +80,7 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-top: 16px;
+      margin-top: 14px;
       flex-wrap: wrap;
     }
 
@@ -95,9 +95,51 @@
 
     /* Main container */
     .container {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 24px 16px;
+    }
+
+    /* Mode Tabs Switcher */
+    .mode-tabs {
+      display: flex;
+      background: #e2e8f0;
+      padding: 6px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      gap: 8px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .mode-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      color: #475569;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+      text-align: center;
+    }
+
+    .mode-tab:hover {
+      color: var(--primary);
+      background: rgba(255,255,255,0.6);
+    }
+
+    .mode-tab.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 4px 14px rgba(26, 74, 138, 0.15);
+      transform: translateY(-1px);
     }
 
     /* Selection Card */
@@ -250,13 +292,14 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
+      margin-bottom: 24px;
       display: none;
     }
 
     .parts-section.visible { display: block; }
 
     .parts-header {
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+      background: linear-gradient(90deg, #b91c1c 0%, #dc2626 100%);
       color: white;
       padding: 16px 24px;
       display: flex;
@@ -266,126 +309,142 @@
 
     .parts-header h2 { font-size: 17px; font-weight: 600; }
 
-    .parts-body { padding: 20px 24px; }
+    .parts-body { padding: 24px; }
 
     .parts-desc {
-      font-size: 14px;
-      color: var(--text-light);
-      margin-bottom: 16px;
-      padding: 10px 14px;
-      background: #FFF9F0;
-      border-left: 3px solid var(--warning);
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 13.5px;
+      color: #92400e;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
 
     .parts-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
     }
 
     .part-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 18px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: white;
-      cursor: default;
+      gap: 16px;
       transition: all 0.2s ease;
-      gap: 12px;
+      background: white;
     }
 
-    .part-card:hover { border-color: var(--primary-light); background: #F5F8FF; }
+    .part-card:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 4px 16px rgba(26, 74, 138, 0.1);
+      transform: translateX(4px);
+    }
 
     .part-info { flex: 1; }
 
-    .part-info .part-label {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text);
+    .part-label {
+      font-weight: 700;
+      font-size: 15px;
+      color: #1e293b;
+      margin-bottom: 4px;
     }
 
-    .part-info .part-sub {
-      font-size: 12px;
-      color: var(--text-light);
-      margin-top: 2px;
+    .part-sub {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
     }
 
     .download-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: white;
+      padding: 10px 20px;
       border: none;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
+      background: var(--primary);
+      color: white;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       transition: all 0.2s ease;
       white-space: nowrap;
-      flex-shrink: 0;
+      user-select: none;
     }
 
     .download-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(26,74,138,0.35);
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 74, 138, 0.3);
     }
 
-    .download-btn:active { transform: translateY(0); }
-
     .download-btn.loading {
-      background: var(--text-light);
-      cursor: wait;
+      background: #718096;
+      cursor: not-allowed;
       pointer-events: none;
     }
 
     .download-btn.success {
-      background: linear-gradient(135deg, var(--success) 0%, #2ecc71 100%);
+      background: var(--success);
     }
 
     .download-btn.error {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      background: var(--accent);
     }
 
-    .download-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-    /* Download all button */
+    /* Download full / all buttons */
     .download-all-wrap {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
       display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
       justify-content: center;
+      margin-top: 10px;
     }
 
     .download-all-btn {
+      padding: 13px 26px;
+      border: none;
+      border-radius: var(--radius-sm);
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 28px;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
       transition: all 0.2s ease;
+      user-select: none;
     }
 
-    .download-all-btn:hover {
+    .download-full-btn {
+      background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+    }
+
+    .download-full-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(192,57,43,0.35);
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.35);
+    }
+
+    .download-seq-btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    }
+
+    .download-seq-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(192, 57, 43, 0.35);
     }
 
     /* Progress bar */
     .progress-wrap {
       display: none;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     .progress-wrap.visible { display: block; }
@@ -486,7 +545,14 @@
     .overview-body { padding: 20px 24px; }
 
     .grade-overview {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .grade-overview:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     .grade-overview h3 {
@@ -502,48 +568,54 @@
     .sem-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 12px;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       .sem-grid { grid-template-columns: 1fr; }
     }
 
     .sem-box {
-      padding: 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
+      padding: 14px 16px;
     }
 
-    .sem-box.hk1 { background: #EEF4FF; border-color: #C8D9F5; }
-    .sem-box.hk2 { background: #FEF0EF; border-color: #F5C6C2; }
+    .sem-box.chuyende-box {
+      grid-column: 1 / -1;
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
 
-    .sem-box .sem-title { font-weight: 700; font-size: 13px; margin-bottom: 6px; }
-    .sem-box.hk1 .sem-title { color: var(--primary); }
-    .sem-box.hk2 .sem-title { color: var(--accent); }
+    .sem-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-    .sem-box ul { margin-left: 16px; }
-    .sem-box ul li { font-size: 12px; color: var(--text); line-height: 1.6; }
+    .sem-box.chuyende-box .sem-title {
+      color: #166534;
+    }
+
+    .sem-box ul {
+      padding-left: 20px;
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.6;
+    }
 
     /* Footer */
     .footer {
       text-align: center;
-      padding: 24px;
+      padding: 24px 16px;
       color: var(--text-light);
-      font-size: 13px;
-      border-top: 1px solid var(--border);
-      margin-top: 24px;
-    }
-
-    /* Animations */
-    .fade-in {
-      animation: fadeIn 0.3s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      font-size: 12.5px;
+      margin-top: 32px;
     }
 
     /* Notification */
@@ -552,65 +624,82 @@
       bottom: 24px;
       right: 24px;
       padding: 14px 20px;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
+      background: #333;
       color: white;
       font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
-      transform: translateX(120%);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-      max-width: 320px;
       display: flex;
       align-items: center;
       gap: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      max-width: 420px;
     }
 
-    .notification.show { transform: translateX(0); }
-    .notification.success { background: var(--success); }
-    .notification.error { background: var(--accent); }
-    .notification.info { background: var(--primary); }
+    .notification.show { transform: translateY(0); opacity: 1; }
+    .notification.success { background: #16a34a; }
+    .notification.error { background: #dc2626; }
+    .notification.info { background: #2563eb; }
   </style>
 </head>
 <body>
 
+<!-- Header -->
 <div class="header">
   <div class="header-content">
-    <span class="icon">⚗️</span>
-    <h1>Tài liệu Ôn tập Lý thuyết Hóa học</h1>
-    <p>Bộ sách Kết nối tri thức với cuộc sống – Trường THCS-THPT Phan Văn Trị</p>
+    <span class="icon">🧪</span>
+    <h1>TÀI LIỆU ÔN TẬP HÓA HỌC & CHUYÊN ĐỀ HỌC TẬP</h1>
+    <p>Bộ sách Kết nối tri thức với cuộc sống • Lớp 10 – 11 – 12 • Chuẩn kiến thức THPT 2026-2027</p>
     <div class="badges">
-      <span class="badge">📗 Hóa 10</span>
-      <span class="badge">📘 Hóa 11</span>
+      <span class="badge">📘 SGK Cơ bản</span>
+      <span class="badge">🔬 Chuyên đề KNTT</span>
+      <span class="badge">📘 Hóa 10</span>
+      <span class="badge">📗 Hóa 11</span>
       <span class="badge">📙 Hóa 12</span>
-      <span class="badge">📄 File DOCX</span>
+      <span class="badge">📄 File DOCX in ấn</span>
     </div>
   </div>
 </div>
 
 <div class="container">
 
+  <!-- Mode Switcher Tabs -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tabSgk" onclick="switchMode('sgk')">
+      <span>📘</span> Sách Giáo Khoa (Lý thuyết cơ bản)
+    </button>
+    <button class="mode-tab" id="tabChuyenDe" onclick="switchMode('chuyende')">
+      <span>🔬</span> Sách Chuyên Đề Học Tập (KNTT)
+    </button>
+  </div>
+
   <!-- Selection Card -->
   <div class="card">
     <div class="card-header">
       <span class="icon">🎯</span>
-      <h2>Chọn khối lớp và học kỳ</h2>
+      <h2 id="cardHeaderTitle">Chọn khối lớp và học kỳ</h2>
     </div>
     <div class="card-body">
       <div class="selection-grid">
         <div class="form-group">
           <label>📚 KHỐI LỚP</label>
           <div class="grade-options">
-            <div class="grade-btn" onclick="selectGrade(10)">10</div>
+            <div class="grade-btn active" onclick="selectGrade(10)">10</div>
             <div class="grade-btn" onclick="selectGrade(11)">11</div>
             <div class="grade-btn" onclick="selectGrade(12)">12</div>
           </div>
         </div>
-        <div class="form-group">
-          <label>📅 HỌC KỲ</label>
-          <div class="sem-options">
-            <div class="sem-btn" onclick="selectSem(1)">🌸 Học kỳ 1</div>
+        <div class="form-group" id="semGroup">
+          <label id="semLabel">📅 HỌC KỲ</label>
+          <div class="sem-options" id="semOptions">
+            <div class="sem-btn active" onclick="selectSem(1)">🌸 Học kỳ 1</div>
             <div class="sem-btn" onclick="selectSem(2)">☀️ Học kỳ 2</div>
+          </div>
+          <div id="chuyendeNotice" style="display:none;padding:12px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--radius-sm);color:#166534;font-size:13px;font-weight:600;line-height:1.5;">
+            ✨ Toàn bộ 3 Chuyên đề bám sát SGK Chuyên đề KNTT (Cả năm học)
           </div>
         </div>
       </div>
@@ -626,33 +715,33 @@
   <div class="parts-section" id="partsSection">
     <div class="parts-header">
       <div style="display:flex;align-items:center;gap:10px;">
-        <span>📚</span>
-        <h2>Danh sách các Chương tải xuống</h2>
+        <span id="partsHeaderIcon">📚</span>
+        <h2 id="partsHeaderTitle">Danh sách các Chương tải xuống</h2>
       </div>
       <span class="badge" id="totalPartsText" style="margin-left:auto;font-size:13px;padding:6px 14px;background:#e0f2fe;color:#0369a1;border-radius:20px;font-weight:700;">0 chương</span>
     </div>
     <div class="parts-body">
-      <div class="parts-desc">
+      <div class="parts-desc" id="partsDescText">
         📖 Tài liệu được biên soạn trọn vẹn theo <strong>từng chương hoàn chỉnh</strong> (chứa đầy đủ tất cả các bài học trong chương) bám sát PPCT & SGK Kết nối tri thức. Mỗi chương được xuất ra 1 file Word (.docx) chuyên sâu kèm ý nghĩa thực tiễn, phương trình phản ứng, cấu trúc phân tử, ví dụ mẫu từng bước và câu hỏi tự luyện có đáp án.
       </div>
       <div class="parts-grid" id="partsGrid"></div>
 
-      <div class="download-all-wrap" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <button class="download-all-btn download-full-btn" onclick="downloadFullSemester()" id="downloadFullBtn" style="background: linear-gradient(135deg, #166534 0%, #15803d 100%);">
+      <div class="download-all-wrap">
+        <button class="download-all-btn download-full-btn" onclick="downloadFullSemester()" id="downloadFullBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
-          📦 Tải trọn bộ học kỳ (Gộp 1 file DOCX)
+          <span id="downloadFullBtnText">📦 Tải trọn bộ học kỳ (Gộp 1 file DOCX)</span>
         </button>
-        <button class="download-all-btn" onclick="downloadAll()" id="downloadAllBtn">
+        <button class="download-all-btn download-seq-btn" onclick="downloadAll()" id="downloadAllBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
-          ⚡ Tải tất cả các chương (Tuần tự)
+          <span id="downloadAllBtnText">⚡ Tải tất cả các chương (Tuần tự)</span>
         </button>
       </div>
 
@@ -675,19 +764,19 @@
       <div class="guide-steps">
         <div class="guide-step">
           <div class="step-num">1</div>
-          <div class="step-text">Chọn <strong>Khối lớp</strong> (10, 11 hoặc 12)</div>
+          <div class="step-text">Chọn <strong>Chế độ tài liệu</strong> (Sách giáo khoa cơ bản hoặc Sách chuyên đề)</div>
         </div>
         <div class="guide-step">
           <div class="step-num">2</div>
-          <div class="step-text">Chọn <strong>Học kỳ</strong> (Học kỳ 1 hoặc 2)</div>
+          <div class="step-text">Chọn <strong>Khối lớp</strong> (10, 11 hoặc 12) & <strong>Học kỳ</strong></div>
         </div>
         <div class="guide-step">
           <div class="step-num">3</div>
-          <div class="step-text">Tải từng phần hoặc <strong>tải tất cả</strong> (tối đa 7 phần)</div>
+          <div class="step-text">Tải từng chương/chuyên đề hoặc <strong>tải trọn bộ 1 file DOCX</strong></div>
         </div>
         <div class="guide-step">
           <div class="step-num">4</div>
-          <div class="step-text">Mở file DOCX, <strong>in ấn hoặc chỉnh sửa</strong> theo nhu cầu</div>
+          <div class="step-text">Mở file DOCX trên Word, <strong>in ấn trực tiếp A4</strong> hoặc biên soạn giáo án</div>
         </div>
       </div>
     </div>
@@ -696,81 +785,100 @@
   <!-- Content Overview -->
   <div class="content-overview">
     <div class="overview-header">
-      <h2>📋 Nội dung chương trình (theo PPCT – KNTT 2026-2027)</h2>
+      <h2>📋 Danh mục nội dung chương trình (KNTT – 2026-2027)</h2>
     </div>
     <div class="overview-body">
+      <!-- Khối 10 -->
       <div class="grade-overview">
-        <h3>🔬 Hóa học lớp 10</h3>
+        <h3>🔬 Hóa học lớp 10 (Kết nối tri thức)</h3>
         <div class="sem-grid">
           <div class="sem-box hk1">
-            <div class="sem-title">Học kỳ 1 (7 phần tải)</div>
+            <div class="sem-title">📘 SGK Học kỳ 1 (4 chương hoàn chỉnh)</div>
             <ul>
-              <li>Mở đầu: Nhập môn Hóa học</li>
-              <li>Chương 1: Cấu tạo nguyên tử (Bài 1 – 4)</li>
-              <li>Chương 2: Bảng tuần hoàn (Bài 5 – 9)</li>
-              <li>Chương 3: Liên kết hóa học (Bài 10 – 14)</li>
-              <li>Chương 4: Phản ứng oxi hóa – khử (Bài 15 – 16)</li>
-              <li>Ôn tập tổng hợp HK1 Hóa 10</li>
+              <li>Chương 1: Cấu tạo nguyên tử (Bài 1, 2, 3, 4 kèm Mở đầu)</li>
+              <li>Chương 2: Bảng tuần hoàn các nguyên tố hoá học (Bài 5 – 9)</li>
+              <li>Chương 3: Liên kết hoá học (Bài 10 – 14)</li>
+              <li>Chương 4: Phản ứng oxi hoá – khử (Bài 15 – 16)</li>
             </ul>
           </div>
           <div class="sem-box hk2">
-            <div class="sem-title">Học kỳ 2 (7 phần tải)</div>
+            <div class="sem-title">📘 SGK Học kỳ 2 (3 chương hoàn chỉnh)</div>
             <ul>
               <li>Chương 5: Năng lượng hóa học (Bài 17 – 18)</li>
-              <li>Chương 6: Tốc độ phản ứng (Bài 19 – 20)</li>
-              <li>Chương 7: Nhóm VIIA – Halogen (Bài 21 – 23)</li>
-              <li>Ôn tập tổng hợp HK2 & Cả năm lớp 10</li>
+              <li>Chương 6: Tốc độ phản ứng hóa học (Bài 19 – 20)</li>
+              <li>Chương 7: Nhóm VIIA – Nguyên tố Halogen (Bài 21 – 23)</li>
+            </ul>
+          </div>
+          <div class="sem-box chuyende-box">
+            <div class="sem-title">🔬 Sách Chuyên đề Hóa học 10 (Trọn bộ 3 Chuyên đề)</div>
+            <ul>
+              <li><strong>Chuyên đề 1: Cơ sở Hóa học</strong> (Liên kết hóa học mở rộng, VSEPR, Lai hóa AO; Phản ứng hạt nhân, định luật phóng xạ & C-14; Năng lượng hoạt hóa Arrhenius; Entropy và Năng lượng tự do Gibbs)</li>
+              <li><strong>Chuyên đề 2: Hoá học trong việc phòng chống cháy, nổ</strong> (Dấu hiệu cháy nổ; Điểm chớp cháy Flash point, Giới hạn nổ LEL/UEL; Tam giác cháy, Tứ diện cháy; Biện pháp PCCC thực tế)</li>
+              <li><strong>Chuyên đề 3: Thực hành Hoá học và Công nghệ thông tin</strong> (Phần mềm ChemSketch, Avogadro vẽ cấu trúc 2D/3D; Thí nghiệm ảo PhET, ChemLab; Tính toán tham số cấu trúc & năng lượng)</li>
             </ul>
           </div>
         </div>
       </div>
 
+      <!-- Khối 11 -->
       <div class="grade-overview">
-        <h3>🧪 Hóa học lớp 11</h3>
+        <h3>🧪 Hóa học lớp 11 (Kết nối tri thức)</h3>
         <div class="sem-grid">
           <div class="sem-box hk1">
-            <div class="sem-title">Học kỳ 1 (7 phần tải - Trọn vẹn Chương 4)</div>
+            <div class="sem-title">📘 SGK Học kỳ 1 (4 chương hoàn chỉnh)</div>
             <ul>
-              <li>Chương 1: Cân bằng hóa học (Bài 1 – 3)</li>
-              <li>Chương 2: Nitrogen – Sulfur (Bài 4 – 9)</li>
-              <li>Chương 3: Đại cương hóa hữu cơ (Bài 10 – 14)</li>
-              <li><strong>Toàn bộ Chương 4: Hydrocarbon</strong> (Bài 15: Alkane, Bài 16: Alkene-Alkyne, Bài 17: Arene, Bài 18)</li>
-              <li>Ôn tập tổng hợp HK1 Hóa 11</li>
+              <li>Chương 1: Cân bằng hoá học (Bài 1, 2, 3)</li>
+              <li>Chương 2: Nitrogen – Sulfur (Bài 4, 5, 6, 7, 8, 9)</li>
+              <li>Chương 3: Đại cương hoá học hữu cơ (Bài 10, 11, 12, 13, 14)</li>
+              <li><strong>Chương 4: Hydrocarbon</strong> (Bài 15: Alkane, 16: Hydrocarbon không no, 17: Arene, 18: Ôn tập)</li>
             </ul>
           </div>
           <div class="sem-box hk2">
-            <div class="sem-title">Học kỳ 2 (7 phần tải - Không có Chương 4)</div>
+            <div class="sem-title">📘 SGK Học kỳ 2 (2 chương hoàn chỉnh)</div>
             <ul>
-              <li>Chương 5: DX halogen – Alcohol – Phenol (Bài 19 – 22)</li>
+              <li>Chương 5: Dẫn xuất halogen – Alcohol – Phenol (Bài 19 – 22)</li>
               <li>Chương 6: Hợp chất carbonyl – Carboxylic acid (Bài 23 – 25)</li>
-              <li>Chuyên đề 11.2: Trải nghiệm thực hành hóa học hữu cơ</li>
-              <li>Ôn tập tổng hợp HK2 & Cả năm lớp 11</li>
+            </ul>
+          </div>
+          <div class="sem-box chuyende-box">
+            <div class="sem-title">🔬 Sách Chuyên đề Hóa học 11 (Trọn bộ 3 Chuyên đề)</div>
+            <ul>
+              <li><strong>Chuyên đề 1: Phân bón</strong> (Dinh dưỡng khoáng đa - trung - vi lượng; Phân đạm urê, lân supephotphat kép, nung chảy, kali, NPK; Độ dinh dưỡng %N, %P2O5, %K2O; Chua hóa đất & Phú dưỡng; Phân hữu cơ vi sinh & Nguyên tắc 4 đúng)</li>
+              <li><strong>Chuyên đề 2: Trải nghiệm, thực hành Hoá học hữu cơ</strong> (Tách tinh dầu chưng cất lôi cuốn hơi nước sả chanh, bưởi; Chuyển hoá chất béo thành xà phòng, vai trò NaCl bão hòa, cơ chế mixen; Điều chế glucosamine hydrochloride từ vỏ tôm phế phẩm)</li>
+              <li><strong>Chuyên đề 3: Dầu mỏ và chế biến dầu mỏ</strong> (Nguồn gốc, thành phần paraffin, naphthene, arene, dầu Bạch Hổ; Chưng cất CDU/VDU, Cracking, Reforming; Chỉ số octane RON; Xăng sinh học E5, Biodiesel B5 và Net Zero 2050)</li>
             </ul>
           </div>
         </div>
       </div>
 
+      <!-- Khối 12 -->
       <div class="grade-overview">
-        <h3>⚗️ Hóa học lớp 12</h3>
+        <h3>⚛️ Hóa học lớp 12 (Kết nối tri thức)</h3>
         <div class="sem-grid">
           <div class="sem-box hk1">
-            <div class="sem-title">Học kỳ 1 (7 phần tải - Trọn vẹn Chương 6)</div>
+            <div class="sem-title">📘 SGK Học kỳ 1 (4 chương hoàn chỉnh)</div>
             <ul>
-              <li>Chương 1: Ester – Lipid (Bài 1 – 3)</li>
-              <li>Chương 2: Carbohydrate (Bài 4 – 7)</li>
-              <li>Chương 3: Hợp chất chứa Nitrogen (Bài 8 – 11)</li>
-              <li>Chương 4: Polymer (Bài 12 – 14)</li>
-              <li>Chương 5: Pin điện và Điện phân (Bài 15 – 17)</li>
-              <li><strong>Toàn bộ Chương 6: Đại cương kim loại</strong> (Bài 18 – 23: Cấu tạo, Tính chất, Tách KL, Hợp kim, Ăn mòn)</li>
-              <li>Ôn tập tổng hợp HK1 Hóa 12</li>
+              <li>Chương 1: Ester – Lipid. Xà phòng và chất giặt rửa (Bài 1, 2, 3)</li>
+              <li>Chương 2: Carbohydrate (Bài 4, 5, 6)</li>
+              <li>Chương 3: Hợp chất chứa nitrogen (Bài 7, 8, 9, 10, 11)</li>
+              <li>Chương 4: Polymer (Bài 12, 13, 14)</li>
             </ul>
           </div>
           <div class="sem-box hk2">
-            <div class="sem-title">Học kỳ 2 (7 phần tải - Không có Chương 6)</div>
+            <div class="sem-title">📘 SGK Học kỳ 2 (4 chương hoàn chỉnh)</div>
             <ul>
-              <li>Chương 7: Nguyên tố nhóm IA & IIA, Nước cứng (Bài 24 – 26)</li>
-              <li>Chương 8: Kim loại chuyển tiếp dãy 1 & Phức chất (Bài 27 – 30)</li>
-              <li>Ôn tập tổng hợp HK2 & Ôn thi tốt nghiệp THPT</li>
+              <li>Chương 5: Pin điện và điện phân (Bài 15, 16, 17)</li>
+              <li>Chương 6: Đại cương về kim loại (Bài 18, 19, 20, 21)</li>
+              <li>Chương 7: Nguyên tố nhóm IA và nhóm IIA (Bài 22, 23, 24)</li>
+              <li>Chương 8: Sơ lược về kim loại chuyển tiếp dãy thứ nhất & Phức chất cơ bản (Bài 25 – 29)</li>
+            </ul>
+          </div>
+          <div class="sem-box chuyende-box">
+            <div class="sem-title">🔬 Sách Chuyên đề Hóa học 12 (Trọn bộ 3 Chuyên đề)</div>
+            <ul>
+              <li><strong>Chuyên đề 1: Cơ chế phản ứng trong Hoá học hữu cơ</strong> (Phân cắt đồng li tạo gốc tự do, dị li tạo carbocation/carbanion; Tác nhân Electrophile & Nucleophile; Cơ chế thế SR, thế SEAr nhân thơm, thế nucleophile SN1 và SN2 đảo cấu hình Walden; Cơ chế cộng AE giải thích quy tắc Markovnikov, cộng AN vào >C=O)</li>
+              <li><strong>Chuyên đề 2: Trải nghiệm, thực hành Hoá học vô cơ</strong> (Tái chế kim loại Al, Fe, Cu tiết kiệm 95% năng lượng, giảm phát thải khí nhà kính; Công nghiệp silicate thủy tinh soda-lime, gốm sứ cao lanh, xi măng Portland & phản ứng đông kết clinker; Xử lí nước sinh hoạt keo tụ phèn chua/PAC, lọc than hoạt tính, khử trùng Cl2/UV)</li>
+              <li><strong>Chuyên đề 3: Một số vấn đề cơ bản về Phức chất</strong> (Nguyên tử trung tâm, phối tử đơn/đa càng chelate EDTA, số phối trí; Thuyết liên kết VB, lai hóa sp, sp3, dsp2, sp3d2; Đồng phân hình học Cisplatin chống ung thư; Phức sinh học Hemoglobin Fe2+, Diệp lục Mg2+, Vitamin B12 Co3+, giải độc chì bằng EDTA)</li>
             </ul>
           </div>
         </div>
@@ -791,15 +899,57 @@
 </div>
 
 <script>
-  let selectedGrade = null;
-  let selectedSem = null;
+  let currentMode = 'sgk'; // 'sgk' or 'chuyende'
+  let selectedGrade = 10;
+  let selectedSem = 1;
   let currentParts = [];
+
+  function switchMode(mode) {
+    currentMode = mode;
+    document.getElementById('tabSgk').classList.toggle('active', mode === 'sgk');
+    document.getElementById('tabChuyenDe').classList.toggle('active', mode === 'chuyende');
+
+    const cardHeaderTitle = document.getElementById('cardHeaderTitle');
+    const semLabel = document.getElementById('semLabel');
+    const semOptions = document.getElementById('semOptions');
+    const chuyendeNotice = document.getElementById('chuyendeNotice');
+    const partsHeaderTitle = document.getElementById('partsHeaderTitle');
+    const partsHeaderIcon = document.getElementById('partsHeaderIcon');
+    const partsDescText = document.getElementById('partsDescText');
+    const downloadFullBtnText = document.getElementById('downloadFullBtnText');
+    const downloadAllBtnText = document.getElementById('downloadAllBtnText');
+
+    if (mode === 'chuyende') {
+      if (cardHeaderTitle) cardHeaderTitle.textContent = 'Chọn khối lớp Chuyên đề học tập';
+      if (semLabel) semLabel.textContent = '🔬 CHƯƠNG TRÌNH';
+      if (semOptions) semOptions.style.display = 'none';
+      if (chuyendeNotice) chuyendeNotice.style.display = 'block';
+
+      if (partsHeaderTitle) partsHeaderTitle.textContent = 'Danh sách 3 Chuyên đề học tập tải xuống';
+      if (partsHeaderIcon) partsHeaderIcon.textContent = '🔬';
+      if (partsDescText) partsDescText.innerHTML = '📖 Tài liệu <strong>Chuyên đề học tập chuyên sâu</strong> bám sát SGK Chuyên đề Kết nối tri thức. Mỗi chuyên đề là 1 file Word (.docx) chuyên sâu kèm sơ đồ, ví dụ bài toán định lượng có lời giải chi tiết từng bước và câu hỏi tự kiểm tra giúp học sinh tự học và vận dụng xuất sắc.';
+      if (downloadFullBtnText) downloadFullBtnText.textContent = '📦 Tải trọn bộ 3 Chuyên đề (Gộp 1 file DOCX)';
+      if (downloadAllBtnText) downloadAllBtnText.textContent = '⚡ Tải tất cả 3 Chuyên đề (Tuần tự)';
+    } else {
+      if (cardHeaderTitle) cardHeaderTitle.textContent = 'Chọn khối lớp và học kỳ';
+      if (semLabel) semLabel.textContent = '📅 HỌC KỲ';
+      if (semOptions) semOptions.style.display = 'flex';
+      if (chuyendeNotice) chuyendeNotice.style.display = 'none';
+
+      if (partsHeaderTitle) partsHeaderTitle.textContent = 'Danh sách các Chương tải xuống';
+      if (partsHeaderIcon) partsHeaderIcon.textContent = '📚';
+      if (partsDescText) partsDescText.innerHTML = '📖 Tài liệu được biên soạn trọn vẹn theo <strong>từng chương hoàn chỉnh</strong> (chứa đầy đủ tất cả các bài học trong chương) bám sát PPCT & SGK Kết nối tri thức. Mỗi chương được xuất ra 1 file Word (.docx) chuyên sâu kèm ý nghĩa thực tiễn, phương trình phản ứng, cấu trúc phân tử, ví dụ mẫu từng bước và câu hỏi tự luyện có đáp án.';
+      if (downloadFullBtnText) downloadFullBtnText.textContent = '📦 Tải trọn bộ học kỳ (Gộp 1 file DOCX)';
+      if (downloadAllBtnText) downloadAllBtnText.textContent = '⚡ Tải tất cả các chương (Tuần tự)';
+    }
+
+    loadParts();
+  }
 
   function selectGrade(grade) {
     selectedGrade = grade;
-    document.querySelectorAll('.grade-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.grade-btn').forEach(btn => {
-      if (parseInt(btn.textContent) === grade) btn.classList.add('active');
+      btn.classList.toggle('active', parseInt(btn.textContent) === grade);
     });
     loadParts();
   }
@@ -813,10 +963,16 @@
   }
 
   async function loadParts() {
-    if (!selectedGrade || !selectedSem) return;
+    if (!selectedGrade) return;
+    if (currentMode === 'sgk' && !selectedSem) return;
 
     try {
-      const res = await fetch(`/api/parts?grade=${selectedGrade}&semester=${selectedSem}`);
+      let url = `/api/parts?grade=${selectedGrade}&type=${currentMode}`;
+      if (currentMode === 'sgk') {
+        url += `&semester=${selectedSem}`;
+      }
+
+      const res = await fetch(url);
       const data = await res.json();
 
       if (!res.ok) {
@@ -824,7 +980,7 @@
         return;
       }
 
-      currentParts = data.parts;
+      currentParts = data.parts || [];
 
       // Update info panel
       const infoPanel = document.getElementById('infoPanel');
@@ -837,30 +993,35 @@
       if (infoPanel) infoPanel.classList.add('visible');
 
       // Update total parts text
-      if (totalPartsEl) totalPartsEl.textContent = `${data.totalParts || (data.parts ? data.parts.length : 0)} chương`;
+      const unitText = currentMode === 'chuyende' ? 'chuyên đề' : 'chương';
+      if (totalPartsEl) totalPartsEl.textContent = `${data.totalParts || currentParts.length} ${unitText}`;
 
       // Render parts grid
       const grid = document.getElementById('partsGrid');
       grid.innerHTML = '';
 
-      data.parts.forEach((part, index) => {
+      currentParts.forEach((part, index) => {
         const card = document.createElement('div');
-        card.className = 'part-card fade-in';
-        card.style.animationDelay = (index * 0.05) + 's';
+        card.className = 'part-card';
         card.id = `part-card-${index}`;
+        const btnLabel = currentMode === 'chuyende' ? 'Tải chuyên đề này (DOCX)' : 'Tải chương này (DOCX)';
+        const subDefault = currentMode === 'chuyende' 
+          ? `Tài liệu chuyên đề học tập chuyên sâu • Lớp ${selectedGrade} – KNTT` 
+          : `Tài liệu đầy đủ các bài trong chương • Lớp ${selectedGrade} – ${selectedSem === 1 ? 'HK1' : 'HK2'}`;
+
         card.innerHTML = `
           <div class="part-info">
             <div class="part-label">${part.label}</div>
-            <div class="part-sub" style="margin-top:4px;color:#475569;line-height:1.5">${part.desc || `Tài liệu đầy đủ các bài trong chương • Lớp ${selectedGrade} – ${selectedSem === 1 ? 'HK1' : 'HK2'}`}</div>
-            <div style="margin-top:6px;font-size:12px;color:#0284c7;font-weight:600;">📄 File Word (.docx) • Chuẩn A4 in ấn • Đầy đủ lý thuyết & bài tập</div>
+            <div class="part-sub" style="margin-top:4px;color:#475569;line-height:1.5">${part.desc || subDefault}</div>
+            <div style="margin-top:6px;font-size:12px;color:#0284c7;font-weight:600;">📄 File Word (.docx) • Chuẩn A4 in ấn • Đầy đủ lý thuyết & bài tập vận dụng</div>
           </div>
           <button class="download-btn" onclick="downloadPart(${index})" id="btn-${index}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px">
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            Tải chương này (DOCX)
+            ${btnLabel}
           </button>
         `;
         grid.appendChild(card);
@@ -868,8 +1029,9 @@
 
       // Show parts section
       const partsSection = document.getElementById('partsSection');
-      partsSection.classList.add('visible');
-      partsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (partsSection) {
+        partsSection.classList.add('visible');
+      }
 
     } catch (err) {
       showNotification('Lỗi kết nối máy chủ: ' + err.message, 'error');
@@ -877,8 +1039,8 @@
   }
 
   async function downloadFullSemester() {
-    if (!selectedGrade || !selectedSem) {
-      showNotification('Vui lòng chọn khối lớp và học kỳ trước', 'info');
+    if (!selectedGrade) {
+      showNotification('Vui lòng chọn khối lớp', 'info');
       return;
     }
 
@@ -890,7 +1052,10 @@
       <path d="M12 2a10 10 0 010 20" stroke-opacity="1"/>
     </svg> Đang tạo trọn bộ...`;
 
-    const downloadUrl = `/api/download?grade=${selectedGrade}&semester=${selectedSem}&part=all`;
+    let downloadUrl = `/api/download?grade=${selectedGrade}&part=all&type=${currentMode}`;
+    if (currentMode === 'sgk') {
+      downloadUrl += `&semester=${selectedSem}`;
+    }
 
     try {
       const response = await fetch(downloadUrl);
@@ -908,7 +1073,20 @@
         throw new Error('File tải về không đúng định dạng Word');
       }
 
-      const filename = `LyThuyetHoa${selectedGrade}_HK${selectedSem}_TronBoTatCaCacChuong.docx`;
+      let filename = currentMode === 'chuyende'
+        ? `ChuyenDe_Hoa${selectedGrade}_TronBo3ChuyenDe.docx`
+        : `LyThuyetHoa${selectedGrade}_HK${selectedSem}_TronBoTatCaCacChuong.docx`;
+
+      const disposition = response.headers.get('Content-Disposition');
+      if (disposition) {
+        const matchUtf8 = disposition.match(/filename\*=UTF-8''([^;]+)/i);
+        if (matchUtf8) filename = decodeURIComponent(matchUtf8[1]);
+        else {
+          const matchAscii = disposition.match(/filename="?([^";]+)"?/i);
+          if (matchAscii) filename = matchAscii[1];
+        }
+      }
+
       const verifiedBlob = new Blob([uint8], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
       const blobUrl = URL.createObjectURL(verifiedBlob);
       const a = document.createElement('a');
@@ -922,14 +1100,16 @@
 
       btn.disabled = false;
       btn.innerHTML = `✅ Đã tải trọn bộ!`;
-      showNotification(`🎉 Đã tải trọn bộ Hóa học ${selectedGrade} - HK${selectedSem} thành công!`, 'success');
+      const successMsg = currentMode === 'chuyende'
+        ? `🎉 Đã tải trọn bộ 3 Chuyên đề Hóa học ${selectedGrade} thành công!`
+        : `🎉 Đã tải trọn bộ Hóa học ${selectedGrade} - HK${selectedSem} thành công!`;
+      showNotification(successMsg, 'success');
       setTimeout(() => { btn.innerHTML = originalHtml; }, 3500);
     } catch (err) {
       console.error('Download all error:', err);
       btn.disabled = false;
       btn.innerHTML = originalHtml;
       showNotification('Lỗi khi tải trọn bộ: ' + err.message, 'error');
-      // Direct navigation fallback
       window.location.href = downloadUrl;
     }
   }
@@ -952,7 +1132,10 @@
       document.head.appendChild(style);
     }
 
-    const downloadUrl = `/api/download?grade=${selectedGrade}&semester=${selectedSem}&part=${index}`;
+    let downloadUrl = `/api/download?grade=${selectedGrade}&part=${index}&type=${currentMode}`;
+    if (currentMode === 'sgk') {
+      downloadUrl += `&semester=${selectedSem}`;
+    }
 
     try {
       const response = await fetch(downloadUrl);
@@ -987,7 +1170,10 @@
       }
 
       // Extract filename
-      let filename = `LyThuyetHoa${selectedGrade}_HK${selectedSem}_Phan${index + 1}.docx`;
+      let filename = currentMode === 'chuyende'
+        ? `ChuyenDe_Hoa${selectedGrade}_ChuyenDe${index + 1}.docx`
+        : `LyThuyetHoa${selectedGrade}_HK${selectedSem}_Chuong${index + 1}.docx`;
+
       const disposition = response.headers.get('Content-Disposition');
       if (disposition) {
         const matchUtf8 = disposition.match(/filename\*=UTF-8''([^;]+)/i);
@@ -1031,7 +1217,6 @@
       btn.innerHTML = `⚠️ Thử lại`;
       showNotification('Lỗi tải file: ' + err.message, 'error');
 
-      // Tự động thử mở link tải trực tiếp
       const fallbackA = document.createElement('a');
       fallbackA.href = downloadUrl;
       fallbackA.setAttribute('download', '');
@@ -1049,11 +1234,12 @@
 
   async function downloadAll() {
     if (!currentParts.length) {
-      showNotification('Vui lòng chọn khối lớp và học kỳ trước', 'info');
+      showNotification('Vui lòng chọn khối lớp trước', 'info');
       return;
     }
 
     const allBtn = document.getElementById('downloadAllBtn');
+    const originalText = allBtn.innerHTML;
     allBtn.disabled = true;
     allBtn.textContent = '⏳ Đang tải tất cả...';
 
@@ -1065,31 +1251,27 @@
     progressFill.style.width = '0%';
 
     for (let i = 0; i < currentParts.length; i++) {
-      progressText.textContent = `Đang tải phần ${i + 1}/${currentParts.length}...`;
+      const unit = currentMode === 'chuyende' ? 'chuyên đề' : 'phần';
+      progressText.textContent = `Đang tải ${unit} ${i + 1}/${currentParts.length}...`;
       progressFill.style.width = ((i / currentParts.length) * 100) + '%';
       await downloadPart(i);
-      // Small delay between downloads
       if (i < currentParts.length - 1) {
         await new Promise(r => setTimeout(r, 1200));
       }
     }
 
     progressFill.style.width = '100%';
-    progressText.textContent = `✅ Đã tải xong tất cả ${currentParts.length} phần!`;
+    progressText.textContent = `✅ Đã tải xong tất cả ${currentParts.length} mục!`;
 
     allBtn.disabled = false;
     allBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px">
       <polyline points="20 6 9 17 4 12"/>
     </svg> Đã tải xong tất cả!`;
 
-    showNotification(`🎉 Đã tải xong tất cả ${currentParts.length} phần!`, 'success');
+    showNotification(`🎉 Đã tải xong tất cả ${currentParts.length} mục!`, 'success');
 
     setTimeout(() => {
-      allBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px">
-        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg> Tải tất cả phần (tuần tự)`;
+      allBtn.innerHTML = originalText;
       progressWrap.classList.remove('visible');
     }, 4000);
   }
@@ -1099,8 +1281,9 @@
     const notifText = document.getElementById('notifText');
     const notifIcon = document.getElementById('notifIcon');
 
+    if (!notif || !notifText) return;
     notifText.textContent = text;
-    notifIcon.textContent = type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ';
+    if (notifIcon) notifIcon.textContent = type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ';
     notif.className = `notification ${type} show`;
 
     clearTimeout(notif._timeout);
@@ -1108,6 +1291,11 @@
       notif.classList.remove('show');
     }, 3500);
   }
+
+  // Khởi tạo tự động khi trang tải xong
+  window.addEventListener('DOMContentLoaded', () => {
+    loadParts();
+  });
 </script>
 
 </body>

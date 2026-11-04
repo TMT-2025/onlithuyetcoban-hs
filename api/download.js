@@ -14,19 +14,31 @@ module.exports = async function handler(req, res) {
   const grade = url.searchParams.get('grade') || (req.query && req.query.grade);
   const semester = url.searchParams.get('semester') || url.searchParams.get('term') || (req.query && (req.query.semester || req.query.term));
   const part = url.searchParams.get('part') || (req.query && req.query.part);
+  const type = url.searchParams.get('type') || (req.query && req.query.type) || 'sgk';
 
   const gradeNum = parseInt(grade);
-  const semKey = semester === '1' ? 'hk1' : 'hk2';
+  const isChuyenDe = type === 'chuyende';
   const isAll = part === 'all' || part === '-1';
   const partIndex = isAll ? 'all' : (parseInt(part) || 0);
 
-  if (!chemistryContent[gradeNum] || !chemistryContent[gradeNum][semKey]) {
-    res.statusCode = 404;
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    return res.end(JSON.stringify({ error: 'Không tìm thấy nội dung khối lớp hoặc học kì' }));
+  let content = null;
+  if (isChuyenDe) {
+    if (chemistryContent.chuyende && chemistryContent.chuyende[gradeNum]) {
+      content = chemistryContent.chuyende[gradeNum];
+    }
+  } else {
+    const semKey = semester === '1' ? 'hk1' : 'hk2';
+    if (chemistryContent[gradeNum] && chemistryContent[gradeNum][semKey]) {
+      content = chemistryContent[gradeNum][semKey];
+    }
   }
 
-  const content = chemistryContent[gradeNum][semKey];
+  if (!content) {
+    res.statusCode = 404;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    return res.end(JSON.stringify({ error: 'Không tìm thấy nội dung khối lớp hoặc chuyên đề' }));
+  }
+
   if (!isAll && partIndex >= content.parts.length) {
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -34,7 +46,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const doc = generateDocumentForPart(grade, semester, partIndex);
+    const doc = generateDocumentForPart(grade, semester, partIndex, type);
     if (!doc) {
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -42,15 +54,29 @@ module.exports = async function handler(req, res) {
     }
 
     const buffer = await Packer.toBuffer(doc);
-    const asciiFilename = isAll 
-      ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
-      : `LyThuyetHoa${grade}_HK${semester}_Chuong${partIndex + 1}.docx`;
-    
-    const utf8Filename = isAll 
-      ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
-      : (content.parts[partIndex] && content.parts[partIndex].label 
-          ? content.parts[partIndex].label.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, '_') + '.docx'
-          : asciiFilename);
+    let asciiFilename, utf8Filename;
+
+    if (isChuyenDe) {
+      asciiFilename = isAll 
+        ? `ChuyenDe_Hoa${grade}_TronBo3ChuyenDe.docx`
+        : `ChuyenDe_Hoa${grade}_ChuyenDe${partIndex + 1}.docx`;
+      
+      utf8Filename = isAll 
+        ? `ChuyenDe_Hoa${grade}_TronBo3ChuyenDe.docx`
+        : (content.parts[partIndex] && content.parts[partIndex].label 
+            ? content.parts[partIndex].label.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, '_') + '.docx'
+            : asciiFilename);
+    } else {
+      asciiFilename = isAll 
+        ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
+        : `LyThuyetHoa${grade}_HK${semester}_Chuong${partIndex + 1}.docx`;
+      
+      utf8Filename = isAll 
+        ? `LyThuyetHoa${grade}_HK${semester}_TronBoTatCaCacChuong.docx`
+        : (content.parts[partIndex] && content.parts[partIndex].label 
+            ? content.parts[partIndex].label.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, '_') + '.docx'
+            : asciiFilename);
+    }
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');

@@ -4,10 +4,17 @@ const { Document, Packer, Paragraph, TextRun, AlignmentType, PageBreak } = requi
 const chemistryContent = require('../chemistry-content');
 const { createHelpers } = require('../lib/docxhelpers');
 
-function generateDocumentForPart(grade, semester, partIndex) {
+function generateDocumentForPart(grade, semester, partIndex, type = 'sgk') {
   const gradeNum = parseInt(grade);
-  const semKey = semester === '1' ? 'hk1' : 'hk2';
-  const content = chemistryContent[gradeNum] && chemistryContent[gradeNum][semKey];
+  let content = null;
+  const isChuyenDe = type === 'chuyende';
+
+  if (isChuyenDe) {
+    content = chemistryContent.chuyende && chemistryContent.chuyende[gradeNum];
+  } else {
+    const semKey = semester === '1' ? 'hk1' : 'hk2';
+    content = chemistryContent[gradeNum] && chemistryContent[gradeNum][semKey];
+  }
 
   if (!content) return null;
 
@@ -23,26 +30,50 @@ function generateDocumentForPart(grade, semester, partIndex) {
   const children = [];
 
   if (isAll) {
-    // Trang bìa chung cho cả học kì
+    // Trang bìa chung
     children.push(new Paragraph({ text: "", spacing: { after: 1200 } }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
-      children: [new TextRun({ text: "TÀI LIỆU TÓM TẮT LÝ THUYẾT TRỌNG TÂM", bold: true, size: 40, color: "1F3864" })],
+      children: [new TextRun({ 
+        text: isChuyenDe ? "TÀI LIỆU TÓM TẮT TRỌNG TÂM CHUYÊN ĐỀ HỌC TẬP" : "TÀI LIỆU TÓM TẮT LÝ THUYẾT TRỌNG TÂM", 
+        bold: true, 
+        size: 38, 
+        color: "1F3864" 
+      })],
       spacing: { after: 200 },
     }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
-      children: [new TextRun({ text: `HÓA HỌC ${grade} — TRỌN BỘ ${semester === '1' ? 'HỌC KÌ 1' : 'HỌC KÌ 2'}`, bold: true, size: 32, color: "0F6E56" })],
+      children: [new TextRun({ 
+        text: isChuyenDe 
+          ? `HÓA HỌC ${grade} — TRỌN BỘ 3 CHUYÊN ĐỀ` 
+          : `HÓA HỌC ${grade} — TRỌN BỘ ${semester === '1' ? 'HỌC KÌ 1' : 'HỌC KÌ 2'}`, 
+        bold: true, 
+        size: 32, 
+        color: "0F6E56" 
+      })],
       spacing: { after: 150 },
     }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
-      children: [new TextRun({ text: "Bộ sách Kết nối tri thức với cuộc sống • Toàn bộ các chương", bold: true, size: 24, color: "993C1D" })],
+      children: [new TextRun({ 
+        text: isChuyenDe 
+          ? "Bộ sách Kết nối tri thức với cuộc sống • Toàn bộ các chuyên đề học tập" 
+          : "Bộ sách Kết nối tri thức với cuộc sống • Toàn bộ các chương", 
+        bold: true, 
+        size: 24, 
+        color: "993C1D" 
+      })],
       spacing: { after: 200 },
     }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
-      children: [new TextRun({ text: "Tài liệu tự học, ôn tập kiểm tra & luyện thi chuyên sâu", italics: true, size: 22, color: "5F5E5A" })],
+      children: [new TextRun({ 
+        text: "Tài liệu tự học, ôn tập kiểm tra & luyện thi chuyên sâu kèm bài tập định lượng", 
+        italics: true, 
+        size: 22, 
+        color: "5F5E5A" 
+      })],
       spacing: { after: 400 },
     }));
     children.push(new Paragraph({
@@ -52,7 +83,7 @@ function generateDocumentForPart(grade, semester, partIndex) {
     }));
     children.push(new Paragraph({ children: [new PageBreak()] }));
 
-    // Duyệt qua tất cả các phần/chương
+    // Duyệt qua tất cả các phần
     for (let i = 0; i < content.parts.length; i++) {
       const part = content.parts[i];
       if (typeof part.builder === 'function') {
@@ -65,16 +96,28 @@ function generateDocumentForPart(grade, semester, partIndex) {
     }
   } else {
     const part = content.parts[partIndex];
-    // Header trang bìa / tiêu đề phần
+    // Header tiêu đề phần
     children.push(new Paragraph({ text: "", spacing: { after: 200 } }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
-      children: [new TextRun({ text: "TÓM TẮT LÝ THUYẾT TRỌNG TÂM", bold: true, size: 36, color: "1F3864" })],
+      children: [new TextRun({ 
+        text: isChuyenDe ? "TÀI LIỆU TRỌNG TÂM CHUYÊN ĐỀ HỌC TẬP" : "TÓM TẮT LÝ THUYẾT TRỌNG TÂM", 
+        bold: true, 
+        size: 36, 
+        color: "1F3864" 
+      })],
       spacing: { after: 120 },
     }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
-      children: [new TextRun({ text: `HÓA HỌC ${grade} — ${semester === '1' ? 'HỌC KÌ 1' : 'HỌC KÌ 2'}`, bold: true, size: 28, color: "0F6E56" })],
+      children: [new TextRun({ 
+        text: isChuyenDe 
+          ? `HÓA HỌC ${grade} — CHUYÊN ĐỀ HỌC TẬP KNTT` 
+          : `HÓA HỌC ${grade} — ${semester === '1' ? 'HỌC KÌ 1' : 'HỌC KÌ 2'}`, 
+        bold: true, 
+        size: 28, 
+        color: "0F6E56" 
+      })],
       spacing: { after: 100 },
     }));
     children.push(new Paragraph({
@@ -84,7 +127,12 @@ function generateDocumentForPart(grade, semester, partIndex) {
     }));
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER,
-      children: [new TextRun({ text: "Bộ sách Kết nối tri thức với cuộc sống • Tài liệu tự học & ôn thi chuyên sâu", italics: true, size: 20, color: "5F5E5A" })],
+      children: [new TextRun({ 
+        text: "Bộ sách Kết nối tri thức với cuộc sống • Tài liệu tự học & bồi dưỡng năng khiếu", 
+        italics: true, 
+        size: 20, 
+        color: "5F5E5A" 
+      })],
       spacing: { after: 280 },
     }));
 
@@ -99,7 +147,9 @@ function generateDocumentForPart(grade, semester, partIndex) {
   children.push(H.spacer());
   children.push(new Paragraph({
     children: [new TextRun({
-      text: `Tài liệu ôn tập lý thuyết – Hóa học ${grade} – ${semester === '1' ? 'Học kỳ 1' : 'Học kỳ 2'}`,
+      text: isChuyenDe 
+        ? `Tài liệu Chuyên đề học tập Hóa học ${grade} – Bộ sách Kết nối tri thức với cuộc sống` 
+        : `Tài liệu ôn tập lý thuyết – Hóa học ${grade} – ${semester === '1' ? 'Học kỳ 1' : 'Học kỳ 2'}`,
       italics: true,
       size: 18,
       color: "5F5E5A"
@@ -109,7 +159,7 @@ function generateDocumentForPart(grade, semester, partIndex) {
   }));
   children.push(new Paragraph({
     children: [new TextRun({
-      text: "Bộ sách: Kết nối tri thức với cuộc sống – THCS-THPT Phan Văn Trị",
+      text: "Trường THCS-THPT Phan Văn Trị • Tổ Khoa học Tự nhiên",
       italics: true,
       size: 18,
       color: "5F5E5A"

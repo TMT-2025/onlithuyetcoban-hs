@@ -7,6 +7,9 @@ const g11_hk1 = require('./data/grade11_hk1');
 const g11_hk2 = require('./data/grade11_hk2');
 const g12_hk1 = require('./data/grade12_hk1');
 const g12_hk2 = require('./data/grade12_hk2');
+const cd10 = require('./data/chuyende10');
+const cd11 = require('./data/chuyende11');
+const cd12 = require('./data/chuyende12');
 
 function combineParts(rawParts, indices) {
   return function(H) {
@@ -288,5 +291,10 @@ module.exports = {
         builder: c.builder
       }))
     }
+  },
+  chuyende: {
+    10: cd10,
+    11: cd11,
+    12: cd12
   }
 };
